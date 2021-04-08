@@ -17,4 +17,16 @@ const eventItemSchema = new Schema({
     }
 })
 
-module.exports = EventItem = mongoose.model('EventItem', eventItemSchema);module.exports = EventItem = mongoose.model('EventItem', eventItemSchema);
+
+/*
+- Tytul wydarzenia
+- Opis
+- Data utworzenia
+- Kiedy sie odbywa + godzina
+- Miasto
+- zdjecie???
+- Kategoria (wybor)
+- Autor (username)
+*/
+
+module.exports = EventItem = mongoose.model('EventItem', eventItemSchema);

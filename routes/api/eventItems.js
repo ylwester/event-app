@@ -7,6 +7,8 @@ const EventItem = require('../../models/EventItem');
 // @route GET api/events
 // @desc Get all events json
 
+
+
 router.get('/', (req, res)=> {
     EventItem.find()
         .then(events => res.json(events))
@@ -14,7 +16,7 @@ router.get('/', (req, res)=> {
 })
 
 router.post('/', (req, res) => {
-    const title = req.body.username;
+    const title = req.body.title;
     const description = req.body.description;
 
     const newEvent = new EventItem({
@@ -25,6 +27,7 @@ router.post('/', (req, res) => {
     newEvent.save()
         .then(() => res.json('Event added!'))
         .catch(err => res.status(400).json('Error: '+ err));
+
 })
 
 module.exports = router;

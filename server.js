@@ -19,6 +19,8 @@ mongoose
     .then(()=> console.log("MongoDB connected..."))
     .catch(err => console.log(err));
 
+app.use(express.json());
+
 //Routes
 app.use('/api/events/', eventItems);
 
