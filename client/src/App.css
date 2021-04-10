@@ -1,0 +1,6 @@
+body {
+    height: 100vh;
+
+}
+
+.wrap { height: calc(100vh - (40px + 1em)); /* 100% of the viewport height */ }

@@ -1,10 +1,12 @@
-import {Row} from "reactstrap";
+import HeaderComponent from "./Header.component";
+
+import '../App.css';
 
 const HomePage = () => {
     return (
-        <Row>
-
-        </Row>
+        <div className="main-wrapper wrap" >
+            <HeaderComponent />
+        </div>
     )
 }
 

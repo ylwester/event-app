@@ -18,7 +18,7 @@ const Navigation = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar color="light" light expand="md">
+    <Navbar className="" color="light" light expand="md">
       <NavbarBrand href="/">EVENT APP</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
@@ -32,19 +32,19 @@ const Navigation = () => {
           <NavItem>
             <NavLink href="/contact">Kontakt</NavLink>
           </NavItem>
-            <UncontrolledDropdown className="ml-auto" nav inNavbar>
-              <DropdownToggle nav caret>
-                Zaloguj się
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <NavLink href="/login">Zaloguj się</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="/register">Zarejestruj</NavLink>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+          <UncontrolledDropdown className="ml-auto" nav inNavbar right>
+            <DropdownToggle nav caret>
+              Zaloguj się
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <NavLink href="/login">Zaloguj się</NavLink>
+              </DropdownItem>
+              <DropdownItem>
+                <NavLink href="/register">Zarejestruj</NavLink>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </Nav>
       </Collapse>
     </Navbar>
