@@ -7,8 +7,6 @@ const EventItem = require('../../models/EventItem');
 // @route GET api/events
 // @desc Get all events json
 
-
-
 router.get('/', (req, res)=> {
     EventItem.find()
         .then(events => res.json(events))
