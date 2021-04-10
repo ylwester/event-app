@@ -22,26 +22,29 @@ const Navigation = () => {
       <NavbarBrand href="/">EVENT APP</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
-        <Nav className="ml-auto" navbar>
+        <Nav className="container-fluid" navbar>
           <NavItem>
             <NavLink href="/event/add">Dodaj wydarzenie</NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="/events">Przeglądaj</NavLink>
           </NavItem>
-          <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret>
-              Zaloguj się
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem>
-                <NavLink href="/login">Zaloguj się</NavLink>
-              </DropdownItem>
-              <DropdownItem>
-                <NavLink href="/register">Zarejestruj</NavLink>
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          <NavItem>
+            <NavLink href="/contact">Kontakt</NavLink>
+          </NavItem>
+            <UncontrolledDropdown className="ml-auto" nav inNavbar>
+              <DropdownToggle nav caret>
+                Zaloguj się
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  <NavLink href="/login">Zaloguj się</NavLink>
+                </DropdownItem>
+                <DropdownItem>
+                  <NavLink href="/register">Zarejestruj</NavLink>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
         </Nav>
       </Collapse>
     </Navbar>

@@ -21,7 +21,6 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/events">
-          {" "}
           <BrowseEvents />
         </Route>
       </Switch>
