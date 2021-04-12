@@ -1,6 +1,10 @@
+import {Container} from "reactstrap";
+
 const ContactPage = () => {
     return (
-        <h1>Kontakt z nami</h1>
+        <Container>
+            <h1>Kontakt z nami</h1>
+        </Container>
     )
 }
 

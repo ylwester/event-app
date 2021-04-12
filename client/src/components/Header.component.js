@@ -11,8 +11,8 @@ const HeaderComponent = () => {
       }}
     >
       <span className="text-center" style={{ lineHeight: "" }}>
-        <h1>Fiesta</h1>
-        <h2 style={{ lineHeight: "2" }}>
+        <h1 style={{ lineHeight: "1" }}>Fiesta</h1>
+        <h2 style={{ lineHeight: "2.5" }}>
           Aplikacja stworzona by pomóc znaleźć Ci rozrywkę!
         </h2>
         <Button>Dowiedz się więcej</Button>

@@ -32,7 +32,7 @@ const Navigation = () => {
           <NavItem>
             <NavLink href="/contact">Kontakt</NavLink>
           </NavItem>
-          <UncontrolledDropdown className="ml-auto" nav inNavbar right>
+          <UncontrolledDropdown className="ml-auto" nav inNavbar>
             <DropdownToggle nav caret>
               Zaloguj się
             </DropdownToggle>

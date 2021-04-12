@@ -24,7 +24,6 @@ const eventItemSchema = new Schema({
 - Data utworzenia
 - Kiedy sie odbywa + godzina
 - Miasto
-- zdjecie???
 - Kategoria (wybor)
 - Autor (username)
 */
