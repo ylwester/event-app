@@ -96,8 +96,8 @@ const AddEventItem = () => {
               <Input type="time" id="time" />
             </Col>
           </FormGroup>
-          <FormGroup check inline className="border-bottom" >
-              <Input type="checkbox" id="dupa" onClick={() => setPriceVisibility()} /> Płatne
+          <FormGroup check inline style={{marginTop: "15px"}}>
+              <Input type="checkbox" id="paid" onClick={() => setPriceVisibility()} /> Wydarzenie płatne
           </FormGroup>
           {priceComponent}
         </Form>
