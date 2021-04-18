@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
+
 import BrowseEvents from "./components/BrowseEvents.component";
 import HomePage from "./components/HomePage.component";
 import AddEventItem from "./components/AddEventItem.component";
