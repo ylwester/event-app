@@ -3,3 +3,8 @@
     padding: 18px 0 18px 0;
     margin-bottom: 0;
 }
+
+.border-bottom-last {
+    padding: 0 0 0 0;
+    margin-bottom: 0;
+}
