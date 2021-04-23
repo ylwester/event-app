@@ -14,6 +14,7 @@ import {useEffect, useMemo, useRef, useState} from "react";
 import { Multiselect } from "multiselect-react-dropdown";
 
 import useVisibilityChange from "./VisibilityChange";
+import axios from "axios";
 
 function getTodayDateToInput() {
   let tempDate = new Date();
@@ -77,15 +78,48 @@ const AddEventItem = () => {
     document.getElementById("day").setAttribute("min", getTodayDateToInput())
   );
 
+  const handlePrice = (e) => {
+    if(isPaid){
+        setPrice(e.target.value);
+    } else {
+      e.target.value = null;
+    }
+  }
+
   const [priceComponent, setPriceVisibility] = useVisibilityChange(
     <FormGroup row className="border-bottom">
       <Label sm={2}>Cena w zł</Label>
       <Col sm={8}>
-        <Input type="number" id="price" step="0.01" value={price} onChange={(e) => {setPrice(e.target.value)}}/>
+        <Input type="number" id="price" step="0.01" value={price} onChange={handlePrice}/>
       </Col>
     </FormGroup>,
     false
   );
+  function AddMarker() {
+    const [position, setPosition] = useState({latitude: 0, longitude: 0})
+
+    const map = useMapEvents({
+      click(event) {
+        const { lat, lng } = event.latlng;
+        setPosition({
+          latitude: lat,
+          longitude: lng,
+        });
+        setLocation({
+          latitude: lat,
+          longitude: lng,
+        })
+      },
+    });
+
+    console.log(position);
+
+    return (
+        position.latitude !== 0 ? (
+            <Marker position={[position.latitude, position.longitude]} />
+        ) : null
+    )
+  }
 
   const displayMap = useMemo(
     () => (
@@ -118,50 +152,30 @@ const AddEventItem = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let bodyFormData =  new FormData();
+    if(!isPaid){
+      setPrice('');
+    }
+    console.log(isPaid);
 
-    bodyFormData.append('title', title);
-    bodyFormData.append('description', description);
-    bodyFormData.append('day', day);
-    bodyFormData.append('time', time);
-    bodyFormData.append('location', JSON.stringify(location));
-    bodyFormData.append('categories', JSON.stringify(selectedCategories));
+    console.log(price);
 
-    bodyFormData.append('isPaid', JSON.stringify(isPaid));
-    // bodyFormData.append('price', price)
+    const event = {
+      title,
+      description,
+      day,
+      time,
+      location,
+      selectedCategories,
+      isPaid,
+      price
+    }
 
-    console.log(title);
-    console.log(description);
+    console.log(event);
 
-console.log("ispaid " + isPaid);
-    console.log(location);
+    axios.post('http://localhost:5000/api/events/', event)
+        .then(res => console.log(res.data))
+        .catch(error => console.log(error));
 
-
-  }
-
-  function AddMarker() {
-    const [position, setPosition] = useState({latitude: 0, longitude: 0})
-
-    const map = useMapEvents({
-      click(event) {
-        const { lat, lng } = event.latlng;
-        setLocation({
-          latitude: position.latitude,
-          longitude: position.longitude,
-        })
-        setPosition({
-          latitude: lat,
-          longitude: lng,
-        });
-      },
-    });
-
-
-    return (
-        position.latitude !== 0 ? (
-            <Marker position={[position.latitude, position.longitude]} />
-        ) : null
-    )
   }
 
   return (
@@ -241,7 +255,7 @@ console.log("ispaid " + isPaid);
             <Input
                 type="checkbox"
                 id="paid"
-                onChange={()=> {setIsPaid(!isPaid)}}
+                onChange={()=> {setIsPaid(!isPaid); setPrice('')}}
                 onClick={() => {
                   setPriceVisibility();
                 }}

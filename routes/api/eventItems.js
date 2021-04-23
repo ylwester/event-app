@@ -17,10 +17,14 @@ router.post('/', (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
 
+    console.log(req.body);
+
+
     const newEvent = new EventItem({
         title,
         description
     });
+
 
     newEvent.save()
         .then(() => res.json('Event added!'))
