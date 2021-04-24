@@ -11,21 +11,31 @@ const eventItemSchema = new Schema({
         type: String,
         required: true,
     },
-    date: {
+    day: {
         type: Date,
         default: new Date(),
+        required: true,
+    },
+    time: {
+        type: String,
+        required: true,
+    },
+    location: {
+        latitude: Number,
+        longitude: Number,
+    },
+    categories: {
+        type: Array,
+        required: true,
+    },
+    isPaid: {
+        type: Boolean,
+    },
+    price: {
+        type: Number,
     }
 })
 
 
-/*
-- Tytul wydarzenia
-- Opis
-- Data utworzenia
-- Kiedy sie odbywa + godzina
-- Miasto
-- Kategoria (wybor)
-- Autor (username)
-*/
 
 module.exports = EventItem = mongoose.model('EventItem', eventItemSchema);

@@ -16,13 +16,25 @@ router.get('/', (req, res)=> {
 router.post('/', (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
+    const day = req.body.day;
+    const time = req.body.time;
+    const location = req.body.location;
+    const categories = req.body.selectedCategories;
+    const isPaid = req.body.isPaid;
+    const price = req.body.price;
 
     console.log(req.body);
 
 
     const newEvent = new EventItem({
         title,
-        description
+        description,
+        day,
+        time,
+        location,
+        categories,
+        isPaid,
+        price
     });
 
 

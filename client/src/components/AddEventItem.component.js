@@ -157,7 +157,7 @@ const AddEventItem = () => {
     }
     console.log(isPaid);
 
-    console.log(price);
+console.log(typeof time)
 
     const event = {
       title,
@@ -194,6 +194,7 @@ const AddEventItem = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 name="title"
+                placeholder="Tytuł"
                 id="title"
               />
             </Col>
@@ -227,7 +228,7 @@ const AddEventItem = () => {
               Czas
             </Label>
             <Col sm={8}>
-              <Input type="time" id="time" value={time} onChange={(e) => {setTime(e.target.value)}} />
+              <Input type="text" id="time" placeholder="HH:mm" pattern='([01]?[0-9]|2[0-3]):[0-5][0-9]' value={time} onChange={(e) => {setTime(e.target.value)}}/>
             </Col>
           </FormGroup>
           <FormGroup row className="border-bottom">
