@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
@@ -12,7 +12,10 @@ import LoginPage from "./components/LoginPage.component";
 import RegisterPage from "./components/RegisterPage.component";
 import Navigation from "./components/Navigation.component";
 
+
 function App() {
+
+
   return (
     <div>
       <Navigation />

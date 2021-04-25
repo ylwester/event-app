@@ -13,6 +13,8 @@ router.get('/', (req, res)=> {
         .catch(err => console.log(err));
 })
 
+router.get('/category/:cat')
+
 router.post('/', (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
