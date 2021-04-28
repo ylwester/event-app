@@ -1,0 +1,9 @@
+.category {
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-bottom: none;
+    padding: .5rem 1rem;
+}
+.category:hover {
+    background-color: aliceblue;
+}

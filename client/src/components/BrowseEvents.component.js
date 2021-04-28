@@ -1,28 +1,56 @@
 import React, {useEffect, useState} from "react";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
-
+import {useRouteMatch, useLocation, Route, Switch} from "react-router-dom";
 import ShowEvent from "./ShowEvent.component";
+import FilterMenuComponent from "./FilterMenu.component";
 import {Col, Container, Row} from "reactstrap";
+import {useQueryParams, ArrayParam, StringParam} from "use-query-params";
 
 const BrowseEvents = () => {
+
+    const [query, setQuery] = useQueryParams({
+        category: ArrayParam,
+        paid: StringParam,
+        date: StringParam,
+    });
+
+    const [urlQuery, setUrlQuery] = useState(useLocation().search);
+
     const [events, setEvents] = useState('');
-    const [url, setUrl] = useState('http://localhost:5000/api/events/');
+    const [url, setUrl] = useState(`http://localhost:5000/api/events${urlQuery}`);
 
     const getEvents = () =>
         fetch(url)
             .then((res) => res.json())
 
-
     useEffect(() => {
+
        getEvents().then((events) => setEvents(events))
-    }, [getEvents()]);
+    });
+
+    const handlePaid = () => {
+        if(query.paid !== undefined){
+            setQuery({paid: undefined});
+        } else {
+            setQuery({paid: "elobytku"});
+        }
+
+        window.location.reload();
+    }
 
   const { path } = useRouteMatch();
   return (
     <Switch>
       <Route exact path={path}>
         <Container fluid={true}>
-          <div>
+            <Row xs="3">
+              <Col sm="1">
+                  <FilterMenuComponent />
+              </Col>
+              <Col>
+
+
+              <button onClick={handlePaid}>Platne</button>
+              <button onClick={()=> {setQuery({category: "teatr"}); window.location.reload()}}>Categoria teatr</button>
               <div>
                   {events.length !== 0 ? events.map(event =>
                   <ul>
@@ -31,11 +59,12 @@ const BrowseEvents = () => {
                       <li>{event.day}</li>
                       <li>{event.time}</li>
                       <li>{event.price}</li>
-                      <li>{event.categories.map(category => category.name)}</li>
+                      <li>{event.categories.map(category => <p style={{fontSize: "10px"}}>{category.name}</p>)}</li>
                   </ul>
                   ): <p> data loading..</p>}
               </div>
-          </div>
+              </Col>
+            </Row>
         </Container>
       </Route>
       <Route path={`${path}/:eventId`}>

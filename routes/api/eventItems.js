@@ -8,12 +8,18 @@ const EventItem = require('../../models/EventItem');
 // @desc Get all events json
 
 router.get('/', (req, res)=> {
+    let category = req.query.category;
+    let isPaid = req.query.paid;
+
+    console.log(category);
+    console.log(isPaid);
+
     EventItem.find()
         .then(events => res.json(events))
         .catch(err => console.log(err));
 })
 
-router.get('/category/:cat')
+
 
 router.post('/', (req, res) => {
     const title = req.body.title;

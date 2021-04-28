@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
@@ -14,7 +14,6 @@ import Navigation from "./components/Navigation.component";
 
 
 function App() {
-
 
   return (
     <div>
