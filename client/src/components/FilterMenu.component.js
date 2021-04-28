@@ -9,29 +9,62 @@ import {
     ListGroupItem,
 } from "reactstrap";
 import "../styles/filterMenu.css";
+import {StringParam, useQueryParams} from "use-query-params";
+import {useEffect} from "react";
 
 
-const FilterMenuComponent = () => {
+const FilterMenuComponent = ({events, eventsCategories}) => {
+    const [query, setQuery] = useQueryParams({
+        category: StringParam,
+        paid: StringParam,
+        date: StringParam,
+    });
+
+    useEffect(() => {
+        if(query.paid)
+        document.getElementById("paid").checked = true;
+    })
+
+
+    const handlePaid = () => {
+        if(query.paid !== undefined){
+            setQuery({paid: undefined});
+        } else {
+            setQuery({paid: "false"});
+        }
+        window.location.reload();
+    }
+
+    const handleCategory = (category) => {
+        if(query.category === category.id.toString()){
+            setQuery({category: undefined});
+        } else {
+            setQuery({category: category.id});
+        }
+    }
+
   return (
       <Container>
         <h5 className="p-1">Filtry</h5>
         <h6 className="p-1 border-bottom">Kategorie</h6>
         <ListGroup flush>
-          <ListGroupItem className="category">Teatr</ListGroupItem>
-          <ListGroupItem className="category">Na zewnatrz</ListGroupItem>
-          <ListGroupItem className="category">Koncert</ListGroupItem>
+            {
+                eventsCategories.length !== 0 ?
+                    eventsCategories.map(category =>
+                        <ListGroupItem id={category.id} onClick={() => handleCategory(category)} key={category.id} className={query.category === category.id.toString() ? 'category active' : "category" } >{category.name}</ListGroupItem>) : null
+            }
         </ListGroup>
         <h6 className="p-1 border-bottom">Płatność</h6>
         <Form>
             <FormGroup check>
                 <Label style={{padding: ".5rem 1rem"}} check for="paid">
-                <Input id="paid" type="checkbox" name="paid" />{''}
-                    Płatne
+                <Input id="paid" onChange={handlePaid} type="checkbox" name="paid" />{''}
+                    Darmowe
                 </Label>
             </FormGroup>
             <h6 className="p-1 border-bottom">Data</h6>
             <FormGroup style={{marginTop: "10px"}}>
-                <input type="date"></input>
+                <input type="date"/>
             </FormGroup>
         </Form>
           <Button>

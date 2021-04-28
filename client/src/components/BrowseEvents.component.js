@@ -5,10 +5,9 @@ import FilterMenuComponent from "./FilterMenu.component";
 import {Col, Container, Row} from "reactstrap";
 import {useQueryParams, ArrayParam, StringParam} from "use-query-params";
 
-const BrowseEvents = () => {
-
+const BrowseEvents = ({eventCategories}) => {
     const [query, setQuery] = useQueryParams({
-        category: ArrayParam,
+        category: StringParam,
         paid: StringParam,
         date: StringParam,
     });
@@ -21,21 +20,11 @@ const BrowseEvents = () => {
     const getEvents = () =>
         fetch(url)
             .then((res) => res.json())
-
     useEffect(() => {
 
        getEvents().then((events) => setEvents(events))
     });
 
-    const handlePaid = () => {
-        if(query.paid !== undefined){
-            setQuery({paid: undefined});
-        } else {
-            setQuery({paid: "elobytku"});
-        }
-
-        window.location.reload();
-    }
 
   const { path } = useRouteMatch();
   return (
@@ -44,13 +33,10 @@ const BrowseEvents = () => {
         <Container fluid={true}>
             <Row xs="3">
               <Col sm="1">
-                  <FilterMenuComponent />
+                  <FilterMenuComponent eventsCategories={eventCategories} />
               </Col>
               <Col>
-
-
-              <button onClick={handlePaid}>Platne</button>
-              <button onClick={()=> {setQuery({category: "teatr"}); window.location.reload()}}>Categoria teatr</button>
+              <button onClick={()=> {setQuery({category: 2}); window.location.reload()}}>Categoria teatr</button>
               <div>
                   {events.length !== 0 ? events.map(event =>
                   <ul>

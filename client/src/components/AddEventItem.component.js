@@ -47,7 +47,7 @@ function LocalizeMe({ map }) {
 }
 
 
-const AddEventItem = () => {
+const AddEventItem = ({eventCategories}) => {
   const [map, setMap] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -58,21 +58,6 @@ const AddEventItem = () => {
   const [isPaid, setIsPaid] = useState(false);
   const [price, setPrice] = useState('')
 
-
-  const [options] = useState([
-    {
-      name: "Koncert",
-      id: 1,
-    },
-    {
-      name: "Teatr",
-      id: 2,
-    },
-    {
-      name: "Na zewnątrz",
-      id: 3,
-    },
-  ]);
 
   useEffect(() =>
     document.getElementById("day").setAttribute("min", getTodayDateToInput())
@@ -244,7 +229,7 @@ console.log(typeof time)
             </Label>
             <Col sm={8}>
               <Multiselect
-                options={options} // Options to display in the dropdown
+                options={eventCategories} // Options to display in the dropdown
                 displayValue="name" // Property name to display in the dropdown options
                 onSelect={categoriesSelect}
                 onRemove={categoriesSelect}

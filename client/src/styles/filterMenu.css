@@ -7,3 +7,11 @@
 .category:hover {
     background-color: aliceblue;
 }
+
+.list-group-item+.list-group-item.active {
+border-top: none;
+}
+
+.list-group-item+.list-group-item.active:hover {
+    color: black;
+}
