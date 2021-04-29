@@ -24,10 +24,16 @@ const eventItemSchema = new Schema({
         latitude: Number,
         longitude: Number,
     },
-    categories: {
-        type: Array,
-        required: true,
-    },
+    categories: [{
+        name: {
+            type: String,
+            required: true,
+        },
+        id: {
+            type: Number,
+            required: true,
+        }
+    }],
     isPaid: {
         type: Boolean,
     },

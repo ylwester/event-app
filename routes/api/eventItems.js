@@ -11,12 +11,15 @@ router.get('/', (req, res)=> {
     let category = req.query.category;
     let isPaid = req.query.paid;
 
-    console.log(category);
-    console.log(isPaid);
-
-    EventItem.find()
-        .then(events => res.json(events))
-        .catch(err => console.log(err));
+    if(category !== undefined) {
+        EventItem.find({"categories.id" : category})
+            .then(events => res.json(events))
+            .catch(err => console.log(err));
+    } else {
+        EventItem.find()
+            .then(events => res.json(events))
+            .catch(err => console.log(err));
+    }
 })
 
 
@@ -33,6 +36,7 @@ router.post('/', (req, res) => {
 
     console.log(req.body);
 
+    console.log(categories);
 
     const newEvent = new EventItem({
         title,

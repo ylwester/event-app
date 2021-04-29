@@ -32,7 +32,7 @@ const BrowseEvents = ({eventCategories}) => {
       <Route exact path={path}>
         <Container fluid={true}>
             <Row xs="3">
-              <Col sm="1">
+              <Col sm={{size: 2}}>
                   <FilterMenuComponent eventsCategories={eventCategories} />
               </Col>
               <Col>
