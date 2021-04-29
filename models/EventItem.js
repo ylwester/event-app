@@ -34,7 +34,7 @@ const eventItemSchema = new Schema({
             required: true,
         }
     }],
-    isPaid: {
+    paid: {
         type: Boolean,
     },
     price: {
