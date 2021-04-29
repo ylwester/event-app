@@ -41,6 +41,7 @@ const FilterMenuComponent = ({events, eventsCategories}) => {
         } else {
             setQuery({category: category.id});
         }
+        window.location.reload();
     }
 
   return (

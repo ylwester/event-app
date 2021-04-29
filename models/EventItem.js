@@ -39,6 +39,10 @@ const eventItemSchema = new Schema({
     },
     price: {
         type: Number,
+    },
+    accepted: {
+        type: Boolean,
+        default: false,
     }
 })
 
