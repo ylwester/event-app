@@ -8,12 +8,16 @@ const EventItem = require("../../models/EventItem");
 // @desc Get all events json
 
 router.get("/", (req, res) => {
-  const { category, paid } = req.query;
+  const { category, paid, day } = req.query;
 
   let find = {};
 
+
+
   find = category ? { ...find, "categories.id": category } : find;
   find = paid ? { ...find, paid: paid } : find;
+  find = day ? { ...find, day: day} : find;
+
 
   EventItem.find(find)
     .then((events) => res.json(events))

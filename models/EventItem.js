@@ -3,6 +3,13 @@ const Schema = mongoose.Schema;
 
 //Create event schema
 const eventItemSchema = new Schema({
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    author: {
+      type: String,
+    },
     title: {
         type: String,
         required: true,
@@ -12,8 +19,7 @@ const eventItemSchema = new Schema({
         required: true,
     },
     day: {
-        type: Date,
-        default: new Date(),
+        type: String,
         required: true,
     },
     time: {
