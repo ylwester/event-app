@@ -142,7 +142,6 @@ const AddEventItem = ({eventCategories}) => {
     }
     console.log(isPaid);
 
-console.log(typeof time)
 
     const event = {
       title,
@@ -233,6 +232,7 @@ console.log(typeof time)
                 displayValue="name" // Property name to display in the dropdown options
                 onSelect={categoriesSelect}
                 onRemove={categoriesSelect}
+                selectionLimit="3"
                 ref={multiselectRef}
               />
             </Col>
