@@ -8,10 +8,12 @@ import {
   Button,
 } from "reactstrap";
 import {MapContainer, TileLayer, Marker, useMapEvents} from "react-leaflet";
-
 import "../styles/addEventForm.css";
-import {useEffect, useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import { Multiselect } from "multiselect-react-dropdown";
+
+import L from 'leaflet';
+import * as ELG from 'esri-leaflet-geocoder';
 
 import useVisibilityChange from "./VisibilityChange";
 import axios from "axios";
@@ -61,7 +63,10 @@ const AddEventItem = ({eventCategories}) => {
 
   useEffect(() =>
     document.getElementById("day").setAttribute("min", getTodayDateToInput())
-  );
+
+  )
+
+
 
   const handlePrice = (e) => {
     if(isPaid){
@@ -94,6 +99,7 @@ const AddEventItem = ({eventCategories}) => {
           latitude: lat,
           longitude: lng,
         })
+
       },
     });
 

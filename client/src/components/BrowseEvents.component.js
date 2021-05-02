@@ -4,6 +4,7 @@ import ShowEvent from "./ShowEvent.component";
 import FilterMenuComponent from "./FilterMenu.component";
 import {Col, Container, Row} from "reactstrap";
 import {useQueryParams, ArrayParam, StringParam} from "use-query-params";
+import EventListItem from "./EventListItem.component";
 
 const BrowseEvents = ({eventCategories}) => {
     const [query, setQuery] = useQueryParams({
@@ -35,21 +36,24 @@ const BrowseEvents = ({eventCategories}) => {
               <Col sm={{size: 2}}>
                   <FilterMenuComponent eventsCategories={eventCategories} />
               </Col>
-              <Col>
-              <button onClick={()=> {setQuery({category: 2}); window.location.reload()}}>Categoria teatr</button>
+              <Col xs="auto">
               <div>
                   {events.length !== 0 ? events.map(event =>
-                  <ul>
-                      <li>{event.title}</li>
-                      <li>{event.description}</li>
-                      <li>{event.day}</li>
-                      <li>{event.time}</li>
-                      <li>{event.price}</li>
-                      <li>{event.categories.map(category => <p style={{fontSize: "10px"}}>{category.name}</p>)}</li>
-                  </ul>
+                  <div>
+                      <EventListItem event={event}/>
+                      {/*<li>{event.title}</li>*/}
+                      {/*<li>{event.description}</li>*/}
+                      {/*<li>{event.day}</li>*/}
+                      {/*<li>{event.time}</li>*/}
+                      {/*<li>{event.price}</li>*/}
+                      {/*<li>{event.categories.map(category => <p style={{fontSize: "10px"}}>{category.name}</p>)}</li>*/}
+                  </div>
                   ): <p> data loading..</p>}
               </div>
               </Col>
+                <Col xs="auto">
+                    mapa
+                </Col>
             </Row>
         </Container>
       </Route>

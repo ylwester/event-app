@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const fetch = require("node-fetch");
 
 //Event Item Model
 const EventItem = require("../../models/EventItem");
@@ -12,12 +13,9 @@ router.get("/", (req, res) => {
 
   let find = {};
 
-
-
   find = category ? { ...find, "categories.id": category } : find;
   find = paid ? { ...find, paid: paid } : find;
-  find = day ? { ...find, day: day} : find;
-
+  find = day ? { ...find, day: day } : find;
 
   EventItem.find(find)
     .then((events) => res.json(events))
@@ -33,26 +31,43 @@ router.post("/", (req, res) => {
   const categories = req.body.selectedCategories;
   const isPaid = req.body.isPaid;
   const price = req.body.price;
+  let city;
 
-  console.log(req.body);
 
-  console.log(categories);
+  const handleAddress = (addr) => {
+    if (addr.city) {
+      city = addr.city;
+    } else if (addr.town) {
+      city = addr.town
+    }
+    const newEvent = new EventItem({
+      title,
+      description,
+      day,
+      time,
+      location,
+      categories,
+      isPaid,
+      price,
+      city,
+    });
 
-  const newEvent = new EventItem({
-    title,
-    description,
-    day,
-    time,
-    location,
-    categories,
-    isPaid,
-    price,
-  });
+    newEvent
+        .save()
+        .then(() => res.json("Event added!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+  }
 
-  newEvent
-    .save()
-    .then(() => res.json("Event added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+  fetch(
+    "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
+      location.latitude +
+      "&lon=" +
+      location.longitude
+  )
+    .then((response) => response.json())
+    .then((data) => handleAddress(data.address))
+
+
 });
 
 module.exports = router;

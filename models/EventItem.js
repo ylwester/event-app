@@ -49,6 +49,10 @@ const eventItemSchema = new Schema({
     accepted: {
         type: Boolean,
         default: false,
+    },
+    city: {
+        type: String,
+        required: false,
     }
 })
 
