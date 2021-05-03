@@ -1,7 +1,6 @@
 header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px
 }
 
 .title {
@@ -9,11 +8,24 @@ header {
     font-size: 1.25rem;
 }
 
-
 #container {
     display:flex;
     justify-content: space-between;
     font-size: .8rem;
+}
+
+#middle-wrapper {
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 5px
+}
+
+#location {
+    font-size: .8rem;
+}
+
+.event-data {
+    font-size: 0.75rem;
 }
 
 #left-wrapper {
@@ -25,13 +37,7 @@ header {
     display: inline-flex;
     justify-content: space-between;
 }
-
-#location {
-    margin-left: 10px;
-    padding: 3px;
-}
-
 .cat {
     margin-right: 10px;
-    padding: 3px;
+    padding: 3px 3px 3px 0;
 }
