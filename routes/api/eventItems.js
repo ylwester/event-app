@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
   const time = req.body.time;
   const location = req.body.location;
   const categories = req.body.selectedCategories;
-  const isPaid = req.body.isPaid;
+  const paid = req.body.paid;
   const price = req.body.price;
   let city;
 
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
       time,
       location,
       categories,
-      isPaid,
+      paid,
       price,
       city,
     });

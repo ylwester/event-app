@@ -12,8 +12,6 @@ import "../styles/addEventForm.css";
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import { Multiselect } from "multiselect-react-dropdown";
 
-import L from 'leaflet';
-import * as ELG from 'esri-leaflet-geocoder';
 
 import useVisibilityChange from "./VisibilityChange";
 import axios from "axios";
@@ -57,7 +55,7 @@ const AddEventItem = ({eventCategories}) => {
   const [time, setTime] = useState('');
   const [selectedCategories, setSelectedCategories] = useState({});
   const [location, setLocation] = useState({latitude: 0, longitude: 0});
-  const [isPaid, setIsPaid] = useState(false);
+  const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState('')
 
 
@@ -69,7 +67,7 @@ const AddEventItem = ({eventCategories}) => {
 
 
   const handlePrice = (e) => {
-    if(isPaid){
+    if(paid){
         setPrice(e.target.value);
     } else {
       e.target.value = null;
@@ -143,10 +141,10 @@ const AddEventItem = ({eventCategories}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(!isPaid){
+    if(!paid){
       setPrice('');
     }
-    console.log(isPaid);
+    console.log(paid);
 
 
     const event = {
@@ -156,7 +154,7 @@ const AddEventItem = ({eventCategories}) => {
       time,
       location,
       selectedCategories,
-      isPaid,
+      paid,
       price
     }
 
@@ -247,7 +245,7 @@ const AddEventItem = ({eventCategories}) => {
             <Input
                 type="checkbox"
                 id="paid"
-                onChange={()=> {setIsPaid(!isPaid); setPrice('')}}
+                onChange={()=> {setPaid(!paid); setPrice('')}}
                 onClick={() => {
                   setPriceVisibility();
                 }}
