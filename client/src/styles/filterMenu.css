@@ -4,14 +4,16 @@
     border-bottom: none;
     padding: .5rem 1rem;
 }
-.category:hover {
-    background-color: aliceblue;
+
+.category.active {
+    border-top: none;
 }
 
-.list-group-item+.list-group-item.active {
-border-top: none;
+.category.active:hover {
+    color:black;
 }
 
-.list-group-item+.list-group-item.active:hover {
+
+.list-group-item.active:hover {
     color: black;
 }

@@ -39,14 +39,8 @@ const BrowseEvents = ({eventCategories}) => {
               <Col xs="auto">
               <div>
                   {events.length !== 0 ? events.map(event =>
-                  <div>
+                  <div style={{marginBottom: "8px"}} key={event._id}>
                       <EventListItem event={event}/>
-                      {/*<li>{event.title}</li>*/}
-                      {/*<li>{event.description}</li>*/}
-                      {/*<li>{event.day}</li>*/}
-                      {/*<li>{event.time}</li>*/}
-                      {/*<li>{event.price}</li>*/}
-                      {/*<li>{event.categories.map(category => <p style={{fontSize: "10px"}}>{category.name}</p>)}</li>*/}
                   </div>
                   ): <p> data loading..</p>}
               </div>
