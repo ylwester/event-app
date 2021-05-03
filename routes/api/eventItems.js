@@ -8,16 +8,39 @@ const EventItem = require("../../models/EventItem");
 // @route GET api/events
 // @desc Get all events json
 
+function getTodayDateToInput() {
+  let tempDate = new Date();
+  let dd = tempDate.getDate();
+  let mm = tempDate.getMonth() + 1;
+  let yyyy = tempDate.getFullYear();
+
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  return yyyy + "-" + mm + "-" + dd;
+}
+
+
 router.get("/", (req, res) => {
   const { category, paid, day } = req.query;
 
+  const todayDate = getTodayDateToInput();
+
   let find = {};
+
+  //Get events that are up to date
+  find = {...find, dayDate : {$gte : todayDate}}
 
   find = category ? { ...find, "categories.id": category } : find;
   find = paid ? { ...find, paid: paid } : find;
   find = day ? { ...find, day: day } : find;
 
   EventItem.find(find)
+      .sort({day: 1})
     .then((events) => res.json(events))
     .catch((err) => console.log(err));
 });
@@ -26,6 +49,7 @@ router.post("/", (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const day = req.body.day;
+  const dayDate = req.body.day;
   const time = req.body.time;
   const location = req.body.location;
   const categories = req.body.selectedCategories;
@@ -44,6 +68,7 @@ router.post("/", (req, res) => {
       title,
       description,
       day,
+      dayDate,
       time,
       location,
       categories,

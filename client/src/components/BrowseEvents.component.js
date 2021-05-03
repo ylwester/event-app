@@ -5,6 +5,7 @@ import FilterMenuComponent from "./FilterMenu.component";
 import {Col, Container, Row} from "reactstrap";
 import {useQueryParams, ArrayParam, StringParam} from "use-query-params";
 import EventListItem from "./EventListItem.component";
+import MapWithEvents from "./MapWithEvents.component";
 
 const BrowseEvents = ({eventCategories}) => {
     const [query, setQuery] = useQueryParams({
@@ -37,7 +38,7 @@ const BrowseEvents = ({eventCategories}) => {
                   <FilterMenuComponent eventsCategories={eventCategories} />
               </Col>
               <Col xs="auto">
-              <div>
+              <div style={{width: "35rem"}}>
                   {events.length !== 0 ? events.map(event =>
                   <div style={{marginBottom: "8px"}} key={event._id}>
                       <EventListItem event={event}/>
@@ -46,7 +47,9 @@ const BrowseEvents = ({eventCategories}) => {
               </div>
               </Col>
                 <Col xs="auto">
-                    mapa
+                    <div>
+                        <MapWithEvents />
+                    </div>
                 </Col>
             </Row>
         </Container>

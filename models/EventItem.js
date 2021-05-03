@@ -22,6 +22,10 @@ const eventItemSchema = new Schema({
         type: String,
         required: true,
     },
+    dayDate: {
+        type: Date,
+        required: true,
+    },
     time: {
         type: String,
         required: true,

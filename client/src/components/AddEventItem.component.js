@@ -151,6 +151,7 @@ const AddEventItem = ({eventCategories}) => {
       title,
       description,
       day,
+      dayDate: day,
       time,
       location,
       selectedCategories,
