@@ -24,7 +24,6 @@ function getTodayDateToInput() {
   return yyyy + "-" + mm + "-" + dd;
 }
 
-
 router.get("/", (req, res) => {
   const { category, paid, day } = req.query;
 
@@ -84,6 +83,7 @@ router.post("/", (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
   }
 
+  //Gets city from coordinates
   fetch(
     "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
       location.latitude +
@@ -95,5 +95,12 @@ router.post("/", (req, res) => {
 
 
 });
+
+router.get('/:id', function (req,res){
+  EventItem.findById(req.params.id)
+      .then((events) => res.json(events))
+      .catch((err) => console.log(err));
+
+})
 
 module.exports = router;

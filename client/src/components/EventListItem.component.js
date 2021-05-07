@@ -3,12 +3,9 @@ import {Card, CardBody} from "reactstrap";
 import "../styles/eventListItem.css";
 import {Link} from "react-router-dom";
 
-const EventListItem = ({event}) => {
+import convertData from "../libs/libs"
 
-    function convertData(data) {
-        let dataArray = data.split("-");
-        return dataArray[2]+"."+dataArray[1]+"."+dataArray[0];
-    }
+const EventListItem = ({event}) => {
 
     return (
         <Card style={{width: "35rem"}}>
