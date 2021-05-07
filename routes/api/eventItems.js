@@ -64,6 +64,7 @@ router.post("/", (req, res) => {
     } else if (addr.town) {
       city = addr.town
     }
+
     const newEvent = new EventItem({
       title,
       description,

@@ -59,10 +59,12 @@ const AddEventItem = ({eventCategories}) => {
   const [price, setPrice] = useState('')
 
 
-  useEffect(() =>
-    document.getElementById("day").setAttribute("min", getTodayDateToInput())
+  useEffect(() => {
+    document.getElementById("day").setAttribute("min", getTodayDateToInput());
 
-  )
+    if (!paid) document.getElementById("paid").checked = false;
+
+  })
 
 
 

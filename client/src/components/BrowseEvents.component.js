@@ -48,7 +48,7 @@ const BrowseEvents = ({eventCategories}) => {
               </Col>
                 <Col xs="auto">
                     <div>
-                        <MapWithEvents />
+                        <MapWithEvents events={events} />
                     </div>
                 </Col>
             </Row>
