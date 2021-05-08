@@ -1,17 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 const app = express();
 const PORT = 5000;
 
 const eventItems = require('./routes/api/eventItems');
+const userAuth = require('./routes/api/userAuth')
 
-//Database URI
-const uri = "mongodb+srv://sylwek:sylwek123@cluster0.iy16k.mongodb.net/eventapp?retryWrites=true&w=majority";
+
+dotenv.config();
 
 //Database connection
 mongoose
-    .connect(uri, {
+    .connect(process.env.DB_CONNECT, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
@@ -32,6 +34,10 @@ app.use(function (req, res, next){
 
 //Routes
 app.use('/api/events/', eventItems);
+
+app.use('/api/users', userAuth)
+
+
 
 
 app.get('/', (req, res) => {
