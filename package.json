@@ -11,10 +11,13 @@
     "dev": "concurrently \"npm run server\" \"npm run client \""
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "@hookstate/core": "^3.0.7",
+    "bcryptjs": "^2.4.3",
     "concurrently": "^6.0.1",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.3",
     "node-fetch": "^2.6.1",
@@ -25,6 +28,7 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.24.0",
+    "eslint-plugin-react": "^7.23.2",
     "prettier": "^2.2.1"
   }
 }

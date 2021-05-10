@@ -1,13 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
-const app = express();
-const PORT = 5000;
-
 const eventItems = require('./routes/api/eventItems');
 const userAuth = require('./routes/api/userAuth')
 
+const app = express();
+const PORT = 5000;
 
 dotenv.config();
 
