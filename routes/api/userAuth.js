@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 const {registerValidation, loginValidation} = require('../../authValidation');
 const bcrypt = require('bcryptjs');
 
 //Register
-router.post('/register', async(req, res) => {
+router.post('/register', cors(), async(req, res) => {
     //Validate sent data
     const {error} = registerValidation(req.body)
     if(error) return res.json(error.details[0].message);
@@ -54,7 +55,7 @@ router.post('/login', async(req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
 
     res.header('auth-token', token).send(token);
-    
+
 })
 
 
