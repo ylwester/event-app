@@ -16,6 +16,7 @@ import { Multiselect } from "multiselect-react-dropdown";
 import useVisibilityChange from "./VisibilityChange";
 import axios from "axios";
 
+
 function getTodayDateToInput() {
   let tempDate = new Date();
   let dd = tempDate.getDate();
@@ -57,6 +58,20 @@ const AddEventItem = ({eventCategories}) => {
   const [location, setLocation] = useState({latitude: 0, longitude: 0});
   const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState('')
+
+  //Reset form inputs state to initial values
+  const clearForm = () => {
+    setTitle('');
+    setDescription('');
+    setDay('');
+    setTime('');
+    setSelectedCategories({});
+    multiselectRef.current.resetSelectedValues();
+    setLocation({latitude: 0, longitude: 0});
+    setPaid(false);
+    setPrice('');
+    setPriceVisibility();
+  }
 
 
   useEffect(() => {
@@ -164,7 +179,10 @@ const AddEventItem = ({eventCategories}) => {
     console.log(event);
 
     axios.post('http://localhost:5000/api/events/', event)
-        .then(res => console.log(res.data))
+        .then((res) => {
+          console.log(res.data);
+          clearForm();
+        })
         .catch(error => console.log(error));
 
   }
