@@ -1,4 +1,4 @@
-import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import {Button, Col, Form, FormGroup, Input, Label, Alert} from "reactstrap";
 import axios from "axios";
 import {useState} from "react";
 
@@ -6,6 +6,18 @@ const RegisterPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [visible, setVisible] = useState(false);
+    const [error, setError] = useState(null);
+
+
+    const onDismiss = () => setVisible(false);
+
+    const handleFormError = (err) => {
+        setError(err.response.data);
+        setVisible(true);
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,19 +25,23 @@ const RegisterPage = () => {
         const user = {
             name,
             email,
-            password
+            password,
+            confirmPassword
         }
 
 
-        axios.post('http://localhost:5000/api/users/register/', user)
+        axios.post('http://localhost:5000/api/users/register/',  user)
             .then(response => console.log(response))
-            .catch(err => console.log(err));
+            .catch(err => handleFormError(err));
     }
 
 
     return (
         <div style={{margin: "auto", width: "50vh"}}>
             <h1>Zarejestruj się</h1>
+            <Alert color="info" isOpen={visible} toggle={onDismiss}>
+                {error ? error : null}
+            </Alert>
             <Form onSubmit={handleSubmit}>
                 <FormGroup row>
                     <Label sm={3} for="userName">Username</Label>
@@ -48,7 +64,7 @@ const RegisterPage = () => {
                 <FormGroup row>
                     <Label sm={3} for="email">Potwierdź hasło</Label>
                     <Col sm={8}>
-                        <Input type="password" autocomplete="new-password" name="confirmPassword" id="confirmPassword" placeholder="Potwierdź hasło" />
+                        <Input type="password" autocomplete="new-password" name="confirmPassword" id="confirmPassword" placeholder="Potwierdź hasło" onChange={(e) => setConfirmPassword(e.target.value)} />
                     </Col>
                 </FormGroup>
                 <Button>Zatwierdź</Button>

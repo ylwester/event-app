@@ -14,6 +14,8 @@ import Navigation from "./components/Navigation.component";
 
 
 function App() {
+  const [loginStatus, setLoginStatus] = useState(false);
+
 
   const [eventCategories] = useState([
     {
@@ -32,14 +34,17 @@ function App() {
 
   return (
     <div>
-      <Navigation />
+      <Navigation loginStatus={loginStatus} />
         <Switch>
-          <Route path="/" exact component={HomePage} />
+          <Route path={["/", "/home"]} exact component={HomePage} />
           <Route path="/event/add" render={props =>
               (<AddEventItem{...props} eventCategories={eventCategories} />)
           }/>
           <Route path="/contact" component={ContactPage} />
-          <Route path="/login" component={LoginPage} />
+          {/*<Route path="/login" component={LoginPage} />*/}
+          <Route path="/login" render={props =>
+              (<LoginPage{...props} loginStatus={loginStatus} setLoginStatus={setLoginStatus} />)
+          }/>
           <Route path="/register" component={RegisterPage} />
           <Route path="/events" render={props =>
               ( <BrowseEvents {...props} eventCategories={eventCategories} />)
