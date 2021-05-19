@@ -22,7 +22,7 @@ const sendAccessToken = (res, req, accesstoken) => {
 const sendRefreshToken = (res, token) => {
     res.cookie('refreshtoken', token, {
         httpOnly: true,
-        path: '/refresh_token'
+        path: '/api/users/refresh_token'
     })
 
 }

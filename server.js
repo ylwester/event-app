@@ -21,6 +21,8 @@ mongoose
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.log(err));
 
+app.use(cookieParser());
+
 app.use(express.json());
 app.use(
   cors({
@@ -47,7 +49,6 @@ app.use(function (req, res, next) {
 });
 
 //Routes
-app.use(cookieParser());
 app.use("/api/events/", eventItems);
 app.use("/api/users", userAuth);
 
