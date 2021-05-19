@@ -1,7 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+
+import axios from "axios";
 
 
 import BrowseEvents from "./components/BrowseEvents.component";
@@ -14,8 +16,22 @@ import Navigation from "./components/Navigation.component";
 
 
 function App() {
-  const [loginStatus, setLoginStatus] = useState(false);
+  const token = localStorage.getItem("token");
 
+  const [loginStatus, setLoginStatus] = useState(token);
+
+
+  useEffect(() => {
+    if(!loginStatus) {
+      axios.get("http://localhost:5000/api/users/isUserAuth", {
+        headers: {
+          "x-access-token": localStorage.getItem("token")
+        }
+      }).then((response) => {
+        console.log(response);
+        setLoginStatus(true);
+      })
+    }}, [])
 
   const [eventCategories] = useState([
     {
@@ -41,7 +57,6 @@ function App() {
               (<AddEventItem{...props} eventCategories={eventCategories} />)
           }/>
           <Route path="/contact" component={ContactPage} />
-          {/*<Route path="/login" component={LoginPage} />*/}
           <Route path="/login" render={props =>
               (<LoginPage{...props} loginStatus={loginStatus} setLoginStatus={setLoginStatus} />)
           }/>

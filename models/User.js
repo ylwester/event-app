@@ -25,7 +25,12 @@ const userSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    refreshToken: {
+        type: String,
+        default: '',
     }
+
 })
 
 module.exports = User = mongoose.model('user', userSchema);

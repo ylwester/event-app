@@ -13,7 +13,10 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
-const Navigation = () => {
+import React from "react";
+
+const Navigation = ({loginStatus}) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -23,7 +26,7 @@ const Navigation = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="container-fluid" navbar>
-          <NavItem>
+          <NavItem style={{display: loginStatus ? "block" : "none"}}>
             <NavLink href="/event/add">Dodaj wydarzenie</NavLink>
           </NavItem>
           <NavItem>
@@ -49,6 +52,6 @@ const Navigation = () => {
       </Collapse>
     </Navbar>
   );
-};
+}
 
 export default Navigation;

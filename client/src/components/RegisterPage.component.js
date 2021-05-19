@@ -14,7 +14,7 @@ const RegisterPage = () => {
     const onDismiss = () => setVisible(false);
 
     const handleFormError = (err) => {
-        setError(err.response.data);
+        setError(err.response.data.error);
         setVisible(true);
     }
 
@@ -26,7 +26,7 @@ const RegisterPage = () => {
             name,
             email,
             password,
-            confirmPassword
+            confirmPassword,
         }
 
 

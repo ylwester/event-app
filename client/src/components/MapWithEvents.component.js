@@ -2,6 +2,8 @@ import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import React from "react";
 import {Link} from "react-router-dom";
 import convertData from "../libs/libs";
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+
 
 //Displays map with events as markers and popups.
 const MapWithEvents = ({events}) => {
@@ -11,6 +13,7 @@ const MapWithEvents = ({events}) => {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <MarkerClusterGroup showCoverageOnHover={false} animate={true}>
                 {events.length !== 0 ? events.map(event =>
                     <Marker position={[event.location.latitude, event.location.longitude]}>
                         <Popup>
@@ -20,6 +23,7 @@ const MapWithEvents = ({events}) => {
                         </Popup>
                     </Marker>
                 ) : null }
+                </MarkerClusterGroup>
             </MapContainer>
         )
 }
