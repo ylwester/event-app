@@ -121,7 +121,7 @@ router.post("/login", async (req, res) => {
 
 //Logout user
 router.post('/logout', (_req, res) => {
-  res.clearCookie('refreshtoken', {path: '/refresh_token'});
+  res.clearCookie('refreshtoken', {path: '/api/users/refresh_token'});
   return res.send({
     message: 'Logged out',
   })
