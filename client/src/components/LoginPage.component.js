@@ -1,21 +1,27 @@
 import { Button, Col, Form, FormGroup, Input, Label, Alert } from "reactstrap";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
-const LoginPage = ({ loginStatus, setLoginStatus }) => {
+import { UserContext } from "../App";
+
+const LoginPage = () => {
+  const [user, setUser] = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(null);
 
   const onDismiss = () => setVisible(false);
+
+
 
   const handleFormError = (err) => {
     setError(err.response.data);
     setVisible(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const user = {
@@ -23,15 +29,38 @@ const LoginPage = ({ loginStatus, setLoginStatus }) => {
       password,
     };
 
-    axios
-      .post("http://localhost:5000/api/users/login/", user)
-      .then((response) => {
-          console.log(response.data);
-          localStorage.setItem("token", response.data.token);
-          setLoginStatus(true);
-          console.log(loginStatus)
+    await axios
+        .post("http://localhost:5000/api/users/login", user, {
+      withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+    }).then((response)=>{
+      console.log(response.data);
+      setUser({
+        accessToken: response.data.accesstoken,
       })
-      .catch((err) => handleFormError(err));
+        })
+
+    // if(result.accessToken) {
+    //   setUser({
+    //     accessToken: result.accessToken,
+    //   });
+    //   console.log(result.accessToken);
+    // } else {
+    //   console.log(result.error);
+    // }
+
+
+
+    // axios
+    //   .post("http://localhost:5000/api/users/login/", user)
+    //   .then((response) => {
+    //       console.log(response.data);
+    //       setLoginStatus(true);
+    //       console.log(loginStatus)
+    //   })
+    //   .catch((err) => handleFormError(err));
   };
 
   return (
@@ -51,7 +80,7 @@ const LoginPage = ({ loginStatus, setLoginStatus }) => {
               autocomplete="email"
               name="email"
               id="email"
-              placeholder="Podaj swój email"
+              placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Col>
@@ -63,15 +92,15 @@ const LoginPage = ({ loginStatus, setLoginStatus }) => {
           <Col sm={8}>
             <Input
               type="password"
-              autocomplete="new-password"
+              autocomplete="current-password"
               name="password"
               id="password"
-              placeholder="Podaj hasło"
+              placeholder="Hasło"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Col>
         </FormGroup>
-        <Button>Zatwierdź</Button>
+        <Button type="submit">Zatwierdź</Button>
       </Form>
     </div>
   );

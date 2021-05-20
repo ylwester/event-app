@@ -130,7 +130,6 @@ router.post('/logout', (_req, res) => {
 //Refresh token
 router.post('/refresh_token', async(req, res) => {
   const token = req.cookies.refreshtoken;
-  console.log(token);
   if (!token) return res.send({accesstoken: 'd'});
 
   let payload = null;
@@ -142,14 +141,11 @@ router.post('/refresh_token', async(req, res) => {
     return res.send({accesstoken: 'a'});
   }
 
-  console.log(payload);
 
   //Token is valid, check if user exists
   const user = await User.findOne({_id: payload.userId});
-  console.log(user);
   if(!user) return res.send({accesstoken: 'b'});
 
-  console.log(user.refreshToken);
 
   if(user.refreshToken !== token) {
     return res.send({accesstoken: 'c'});

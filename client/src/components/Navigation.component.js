@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Collapse,
   DropdownItem,
@@ -13,27 +13,35 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
-import React from "react";
+import {UserContext} from "../App";
 
-const Navigation = ({loginStatus}) => {
+import React from "react";
+import {Link} from "react-router-dom";
+
+const Navigation = ({logOutCallback}) => {
+  const [user] = useContext(UserContext)
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <Navbar className="" color="light" light expand="md">
-      <NavbarBrand href="/">EVENT APP</NavbarBrand>
+      <NavbarBrand>
+        <Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>
+      </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="container-fluid" navbar>
-          <NavItem style={{display: loginStatus ? "block" : "none"}}>
-            <NavLink href="/event/add">Dodaj wydarzenie</NavLink>
+          {
+            user.accessToken ?           <NavItem>
+              <Link to="/event/add">Dodaj wydarzenie</Link>
+            </NavItem> : null
+          }
+          <NavItem>
+            <Link to="/events">Przeglądaj</Link>
           </NavItem>
           <NavItem>
-            <NavLink href="/events">Przeglądaj</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/contact">Kontakt</NavLink>
+            <Link to="/contact">Kontakt</Link>
           </NavItem>
           <UncontrolledDropdown className="ml-auto" nav inNavbar>
             <DropdownToggle nav caret>
@@ -41,10 +49,10 @@ const Navigation = ({loginStatus}) => {
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem>
-                <NavLink href="/login">Zaloguj się</NavLink>
+                <Link to="/login">Zaloguj się</Link>
               </DropdownItem>
               <DropdownItem>
-                <NavLink href="/register">Zarejestruj</NavLink>
+                <Link to="/register">Zarejestruj</Link>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
