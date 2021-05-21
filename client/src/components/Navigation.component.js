@@ -9,7 +9,6 @@ import {
   NavbarBrand,
   NavbarToggler,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
 } from "reactstrap";
 
