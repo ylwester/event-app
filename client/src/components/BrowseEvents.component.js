@@ -28,10 +28,10 @@ const BrowseEvents = ({eventCategories}) => {
     });
 
 
-  const { path } = useRouteMatch();
+  // const { path } = useRouteMatch();
   return (
-    <Switch>
-      <Route exact path={path}>
+    // <Switch>
+    //   <Route exact path={path}>
         <Container fluid={true}>
             <Row xs="3">
               <Col sm={{size: 2}}>
@@ -53,12 +53,12 @@ const BrowseEvents = ({eventCategories}) => {
                 </Col>
             </Row>
         </Container>
-      </Route>
-      <Route path={`${path}/:eventId`}>
-        <ShowEvent />
-      </Route>
-    </Switch>
-  );
+      // </Route>
+      // {<Route path={`${path}/:eventId`}>}
+      // {     <ShowEvent />}
+      // {</Route>}
+    // </Switch>
+  )
 };
 
 export default BrowseEvents;

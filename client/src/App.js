@@ -14,6 +14,7 @@ import ContactPage from "./components/ContactPage.component";
 import LoginPage from "./components/LoginPage.component";
 import RegisterPage from "./components/RegisterPage.component";
 import Navigation from "./components/Navigation.component";
+import ShowEvent from "./components/ShowEvent.component";
 
 export const UserContext = React.createContext([]);
 
@@ -73,7 +74,9 @@ function App() {
                 ( <BrowseEvents {...props} eventCategories={eventCategories} />)
             }>
             </Route>
-
+          <Route path={`/events/:eventId`}>
+            <ShowEvent />
+          </Route>
       </UserContext.Provider>
   );
 }
