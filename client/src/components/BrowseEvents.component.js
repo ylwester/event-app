@@ -8,15 +8,18 @@ import { EventContext} from "../App";
 
 const BrowseEvents = ({eventCategories}) => {
     const [events, setEvents] = useContext(EventContext);
+
+    const [result, setResult] = useState(events);
+
   return (
         <Container fluid={true}>
             <Row xs="3">
               <Col sm={{size: 2}}>
-                  <FilterMenuComponent eventsCategories={eventCategories} />
+                  <FilterMenuComponent events={events} result={result} setResult={setResult} eventsCategories={eventCategories} />
               </Col>
               <Col xs="auto">
               <div style={{width: "35rem"}}>
-                  {events.length !== 0 ? events.map(event =>
+                  {result.length !== 0 ? result.map(event =>
                   <div style={{marginBottom: "8px"}} key={event._id}>
                       <EventListItem event={event}/>
                   </div>
@@ -25,7 +28,7 @@ const BrowseEvents = ({eventCategories}) => {
               </Col>
                 <Col xs="auto">
                     <div>
-                        <MapWithEvents events={events} />
+                        <MapWithEvents events={result} />
                     </div>
                 </Col>
             </Row>

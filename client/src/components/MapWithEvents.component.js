@@ -13,7 +13,7 @@ const MapWithEvents = ({events}) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {events.length !== 0 ? events.map(event =>
-                    <Marker position={[event.location.latitude, event.location.longitude]}>
+                    <Marker key={event._id} position={[event.location.latitude, event.location.longitude]}>
                         <Popup>
                             {convertData(event.day)} {event.time}
                             <br/>

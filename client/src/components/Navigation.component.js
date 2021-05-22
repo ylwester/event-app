@@ -26,7 +26,8 @@ const Navigation = ({logOutCallback}) => {
   return (
     <Navbar className="" color="light" light expand="md">
       <NavbarBrand>
-        <Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>
+        EVENT APP
+        {/*<Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>*/}
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
