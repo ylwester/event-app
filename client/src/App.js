@@ -13,7 +13,7 @@ import LoginPage from "./components/LoginPage.component";
 import RegisterPage from "./components/RegisterPage.component";
 import Navigation from "./components/Navigation.component";
 import ShowEvent from "./components/ShowEvent.component";
-
+axios.defaults.withCredentials = true;
 export const UserContext = createContext([]);
 
 export const EventContext = createContext([]);

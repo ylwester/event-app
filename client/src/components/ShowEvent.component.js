@@ -1,18 +1,24 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Container } from "reactstrap";
+import {useParams} from "react-router-dom";
+import {useContext, useState, useEffect} from "react";
+import {Container} from "reactstrap";
+
+import {EventContext} from "../App";
+
 
 function ShowEvent() {
-  const [event, setEvent] = useState("");
-  const { eventId } = useParams();
-
-  const getEvent = () =>
-    fetch(`http://localhost:5000/api/events/${eventId}`).then((res) =>
-      res.json()
-    );
-  useEffect(() => {
-    getEvent().then((event) => setEvent(event));
+    const [events, setEvents] = useContext(EventContext);
+    const { eventId } = useParams();
+  const [event, setEvent] = useState(()=> {
+      return events.filter(event => event._id === eventId);
   });
+
+      useEffect(() => {
+          const result = events.filter(event => event._id === eventId);
+          setEvent(result[0]);
+      }, [eventId])
+
+
+    console.log(event);
 
   let createdAt = new Date(event.createdAt)
 

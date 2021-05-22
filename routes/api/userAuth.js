@@ -127,10 +127,12 @@ router.post('/logout', (_req, res) => {
   })
 })
 
+
 //Refresh token
 router.post('/refresh_token', async(req, res) => {
   const token = req.cookies.refreshtoken;
-  if (!token) return res.send({accesstoken: 'd'});
+  console.log(req.cookies)
+  if (!token) return res.send({accesstoken: ''});
 
   let payload = null;
 
@@ -138,17 +140,17 @@ router.post('/refresh_token', async(req, res) => {
     payload = verify(token, process.env.REFRESH_TOKEN_SECRET);
 
   } catch (err) {
-    return res.send({accesstoken: 'a'});
+    return res.send({accesstoken: ''});
   }
 
 
   //Token is valid, check if user exists
   const user = await User.findOne({_id: payload.userId});
-  if(!user) return res.send({accesstoken: 'b'});
+  if(!user) return res.send({accesstoken: ''});
 
 
   if(user.refreshToken !== token) {
-    return res.send({accesstoken: 'c'});
+    return res.send({accesstoken: ''});
   }
 
   //Create new refresh and access token
