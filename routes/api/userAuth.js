@@ -18,7 +18,7 @@ const { registerValidation, loginValidation } = require("../../authValidation");
 const bcrypt = require("bcryptjs");
 
 //Register
-router.post("/register", cors(), async (req, res) => {
+router.post("/register", async (req, res) => {
 
   try {
   //Validate sent data
@@ -87,16 +87,13 @@ router.post("/login", async (req, res) => {
 
   try {
   if (error) throw new Error(error.details[0].message);
-  // return res.status(400).send(error.details[0].message);
 
     const user = await User.findOne({ email: req.body.email });
-    if (!user)
-    return res.status(400).send("Email or password is wrong");
+    if (!user) throw new Error("Nieprawidłowy email lub hasło");
 
     //Check if password is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) throw new Error("Nieprawidłowe hasło");
-    // return res.status(400).send("Invalid password");
 
     //Create access and refresh token
     const accesstoken = createAccessToken(user._id);
@@ -109,7 +106,7 @@ router.post("/login", async (req, res) => {
 
     //Send token, refresh as a cookie, access as response.
     sendRefreshToken(res, refreshtoken);
-    sendAccessToken(res, req, accesstoken);
+    sendAccessToken(res, req, user, accesstoken);
 
 
   } catch (err) {
@@ -160,7 +157,10 @@ router.post('/refresh_token', async(req, res) => {
   user.refreshToken = refreshtoken;
   user.save();
   sendRefreshToken(res, refreshtoken);
-  res.send({accesstoken})
+  res.send({
+    accesstoken: accesstoken,
+    name: user.name,
+  })
 })
 
 module.exports = router;

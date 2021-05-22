@@ -16,12 +16,24 @@ import {UserContext} from "../App";
 
 import React from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
-const Navigation = ({logOutCallback}) => {
-  const [user] = useContext(UserContext)
+const Navigation = () => {
+  const [user, setUser] = useContext(UserContext)
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+  const logOutCallback = async () => {
+    console.log(user);
+    await axios.post('http://localhost:5000/api/users/logout', '', {
+      withCredentials: true,
+    })
+        .then(()=> {
+          setUser({});
+        })
+        .catch((err)=> console.error(err));
+  };
 
   return (
     <Navbar className="" color="light" light expand="md">
@@ -43,19 +55,28 @@ const Navigation = ({logOutCallback}) => {
           <NavItem>
             <Link to="/contact">Kontakt</Link>
           </NavItem>
-          <UncontrolledDropdown className="ml-auto" nav inNavbar>
-            <DropdownToggle nav caret>
-              Zaloguj się
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem>
-                <Link to="/login">Zaloguj się</Link>
-              </DropdownItem>
-              <DropdownItem>
-                <Link to="/register">Zarejestruj</Link>
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          {
+
+            user.accessToken ?
+                <div className="ml-auto">
+              {user.name}
+                  <input type="button" onClick={logOutCallback} value="Wyloguj się" />
+            </div>
+                :
+                <UncontrolledDropdown className="ml-auto" nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Zaloguj się
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <Link to="/login">Zaloguj się</Link>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Link to="/register">Zarejestruj</Link>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+          }
         </Nav>
       </Collapse>
     </Navbar>

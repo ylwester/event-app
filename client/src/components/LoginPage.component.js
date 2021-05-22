@@ -4,6 +4,8 @@ import { useState, useEffect, useContext } from "react";
 
 import { UserContext } from "../App";
 
+import { useHistory } from "react-router-dom";
+
 const LoginPage = () => {
   const [user, setUser] = useContext(UserContext);
   const [email, setEmail] = useState("");
@@ -13,11 +15,10 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
 
   const onDismiss = () => setVisible(false);
-
-
+  const history = useHistory();
 
   const handleFormError = (err) => {
-    setError(err.response.data);
+    setError(err.response.data.error);
     setVisible(true);
   };
 
@@ -30,37 +31,21 @@ const LoginPage = () => {
     };
 
     await axios
-        .post("http://localhost:5000/api/users/login", user, {
-      withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-    }).then((response)=>{
-      console.log(response.data);
-      setUser({
-        accessToken: response.data.accesstoken,
+      .post("http://localhost:5000/api/users/login", user, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-        })
-
-    // if(result.accessToken) {
-    //   setUser({
-    //     accessToken: result.accessToken,
-    //   });
-    //   console.log(result.accessToken);
-    // } else {
-    //   console.log(result.error);
-    // }
-
-
-
-    // axios
-    //   .post("http://localhost:5000/api/users/login/", user)
-    //   .then((response) => {
-    //       console.log(response.data);
-    //       setLoginStatus(true);
-    //       console.log(loginStatus)
-    //   })
-    //   .catch((err) => handleFormError(err));
+      .then((response) => {
+        console.log(response.data);
+        setUser({
+          name: response.data.name,
+          accessToken: response.data.accesstoken,
+        });
+        history.push("/");
+      })
+      .catch(err => handleFormError(err));
   };
 
   return (

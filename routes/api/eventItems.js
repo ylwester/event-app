@@ -45,6 +45,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  const author = req.body.author;
+  console.log(author);
   const title = req.body.title;
   const description = req.body.description;
   const day = req.body.day;
@@ -66,6 +68,7 @@ router.post("/", (req, res) => {
 
     const newEvent = new EventItem({
       title,
+      author,
       description,
       day,
       dayDate,

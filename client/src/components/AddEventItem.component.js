@@ -9,12 +9,14 @@ import {
 } from "reactstrap";
 import {MapContainer, TileLayer, Marker, useMapEvents} from "react-leaflet";
 import "../styles/addEventForm.css";
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
 import { Multiselect } from "multiselect-react-dropdown";
 
 
 import useVisibilityChange from "./VisibilityChange";
 import axios from "axios";
+
+import { UserContext } from "../App";
 
 
 function getTodayDateToInput() {
@@ -49,6 +51,7 @@ function LocalizeMe({ map }) {
 
 
 const AddEventItem = ({eventCategories}) => {
+  const [user] = useContext(UserContext);
   const [map, setMap] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -163,8 +166,10 @@ const AddEventItem = ({eventCategories}) => {
     }
     console.log(paid);
 
+    console.log(user);
 
     const event = {
+      author: user.name,
       title,
       description,
       day,

@@ -13,6 +13,14 @@ const RegisterPage = () => {
 
     const onDismiss = () => setVisible(false);
 
+    const handleNameInput = (e) => {
+        const newName = e.target.value.replace(
+            /[^a-zA-Z\s]/g,
+            ""
+        );
+        setName(newName);
+    }
+
     const handleFormError = (err) => {
         setError(err.response.data.error);
         setVisible(true);
@@ -30,7 +38,7 @@ const RegisterPage = () => {
         }
 
 
-        axios.post('http://localhost:5000/api/users/register/',  user)
+        axios.post('http://localhost:5000/api/users/register',  user)
             .then(response => console.log(response))
             .catch(err => handleFormError(err));
     }
@@ -46,7 +54,7 @@ const RegisterPage = () => {
                 <FormGroup row>
                     <Label sm={3} for="userName">Username</Label>
                     <Col sm={8}>
-                        <Input type="text" autocomplete="username" name="username" id="userName" placeholder="Podaj swój nick" onChange={(e) => setName(e.target.value)} />
+                        <Input type="text" value={name} autocomplete="username" name="username" id="userName" placeholder="Podaj swój nick" onChange={handleNameInput}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>

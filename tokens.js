@@ -12,9 +12,10 @@ const createRefreshToken = userId => {
     })
 }
 
-const sendAccessToken = (res, req, accesstoken) => {
+const sendAccessToken = (res, req, user, accesstoken) => {
     res.send({
         accesstoken,
+        name: user.name,
         email: req.body.email,
     })
 }

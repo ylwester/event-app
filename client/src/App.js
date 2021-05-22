@@ -23,20 +23,19 @@ function App() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const logOutCallback = () => {};
 
   useEffect(() => {
     async function checkRefreshToken() {
       await axios
-        .post("http://localhost:5000/api/users/refresh_token", {
+        .post("http://localhost:5000/api/users/refresh_token", '',{
           withCredentials: true,
         })
         .then((response) => {
-          console.log(response.data.accesstoken);
+            console.log(response)
           setUser({
-            accessToken: response.data.accesstoken,
+              name: response.data.name,
+              accessToken: response.data.accesstoken,
           });
-          // setLoading(false);
         });
     }
     async function getEventsFromApi() {
@@ -73,7 +72,7 @@ function App() {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      <Navigation logOutCallback={logOutCallback} />
+      <Navigation />
       <Route path={["/", "/home"]} exact component={HomePage} />
       <Route
         path="/event/add"
