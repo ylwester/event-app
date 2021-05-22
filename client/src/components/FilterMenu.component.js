@@ -135,7 +135,6 @@
 // export default FilterMenuComponent;
 
 import {useEffect, useState} from "react";
-import {set} from "mongoose";
 
 const FilterMenuComponent = ({ events, result, setResult, eventsCategories }) => {
     const [filterByCategory, setFilterByCategory] = useState('');
@@ -168,14 +167,14 @@ const FilterMenuComponent = ({ events, result, setResult, eventsCategories }) =>
         );
         console.log(res);
         setResult(res);
-    }, [filterByCategory, filterByPaid, filterByDate]);
+    }, [filterByCategory, filterByPaid, filterByDate, events, setResult]);
 
     const handleCategory = e => {
         console.log(e.target.value);
         setFilterByCategory(e.target.value);
     }
 
-    const handlePaid = e => {
+    const handlePaid = () => {
         if(!filterByPaid){
             setFilterByPaid("false");
         }else {

@@ -55,6 +55,9 @@ const Navigation = () => {
           <NavItem>
             <Link to="/contact">Kontakt</Link>
           </NavItem>
+          <NavItem>
+            <Link to="/toacceptevents">Do zaakceptowania</Link>
+          </NavItem>
           {
 
             user.accessToken ?

@@ -2,10 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const {verify} = require("jsonwebtoken");
-const cors = require("cors");
-
-
-// const verify = require("../../verifyToken");
 
 const {
   createAccessToken,
@@ -128,7 +124,6 @@ router.post('/logout', (_req, res) => {
 //Refresh token
 router.post('/refresh_token', async(req, res) => {
   const token = req.cookies.refreshtoken;
-  console.log(req.cookies)
   if (!token) return res.send({accesstoken: ''});
 
   let payload = null;

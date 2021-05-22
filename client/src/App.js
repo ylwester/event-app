@@ -13,9 +13,10 @@ import LoginPage from "./components/LoginPage.component";
 import RegisterPage from "./components/RegisterPage.component";
 import Navigation from "./components/Navigation.component";
 import ShowEvent from "./components/ShowEvent.component";
+import EventsAccept from "./components/EventsAccept.component";
+
 axios.defaults.withCredentials = true;
 export const UserContext = createContext([]);
-
 export const EventContext = createContext([]);
 
 function App() {
@@ -95,6 +96,9 @@ function App() {
         <Route path={`/events/:eventId`}>
           <ShowEvent />
         </Route>
+            <Route path={`/toacceptevents`}>
+                <EventsAccept />
+            </Route>
     </EventContext.Provider>
     </UserContext.Provider>
   );
