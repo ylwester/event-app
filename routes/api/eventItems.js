@@ -32,14 +32,14 @@ router.get("/", (req, res) => {
   let find = {};
 
   //Get events that are up to date
-  find = {...find, dayDate : {$gte : todayDate}}
+  find = { ...find, dayDate: { $gte: todayDate } };
 
   find = category ? { ...find, "categories.id": category } : find;
   find = paid ? { ...find, paid: paid } : find;
   find = day ? { ...find, day: day } : find;
 
   EventItem.find(find)
-      .sort({day: 1})
+    .sort({ day: 1 })
     .then((events) => res.json(events))
     .catch((err) => console.log(err));
 });
@@ -58,12 +58,11 @@ router.post("/", (req, res) => {
   const price = req.body.price;
   let city;
 
-
   const handleAddress = (addr) => {
     if (addr.city) {
       city = addr.city;
     } else if (addr.town) {
-      city = addr.town
+      city = addr.town;
     }
 
     const newEvent = new EventItem({
@@ -81,10 +80,10 @@ router.post("/", (req, res) => {
     });
 
     newEvent
-        .save()
-        .then(() => res.json("Event added!"))
-        .catch((err) => res.status(400).json("Error: " + err));
-  }
+      .save()
+      .then(() => res.json("Event added!"))
+      .catch((err) => res.status(400).json("Error: " + err));
+  };
 
   //Gets city from coordinates
   fetch(
@@ -94,16 +93,30 @@ router.post("/", (req, res) => {
       location.longitude
   )
     .then((response) => response.json())
-    .then((data) => handleAddress(data.address))
-
-
+    .then((data) => handleAddress(data.address));
 });
 
-router.get('/:id', function (req,res){
-  EventItem.findById(req.params.id)
-      .then((events) => res.json(events))
-      .catch((err) => console.log(err));
+// router.get("/:id", function (req, res) {
+//   EventItem.findById(req.params.id)
+//     .then((events) => res.json(events))
+//     .catch((err) => console.log(err));
+// });
 
-})
+router.post("/accept/:id", function (req, res) {
+    let updateResult;
+    console.log(req.params.id);
+  EventItem.findByIdAndUpdate(req.params.id, {
+      accepted: true
+  }, function (err, docs) {
+      if(err) {
+          throw new Error(err);
+      } else {
+          updateResult = docs;
+          console.log("Updated user: ", docs)
+      }
+  });
+
+  res.send(updateResult);
+});
 
 module.exports = router;
