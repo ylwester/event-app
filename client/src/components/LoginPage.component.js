@@ -42,6 +42,7 @@ const LoginPage = () => {
         setUser({
           name: response.data.name,
           accessToken: response.data.accesstoken,
+          role: response.data.role,
         });
         history.push("/");
       })

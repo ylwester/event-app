@@ -55,11 +55,12 @@ const Navigation = () => {
           <NavItem>
             <Link to="/contact">Kontakt</Link>
           </NavItem>
-          <NavItem>
-            <Link to="/toacceptevents">Do zaakceptowania</Link>
-          </NavItem>
           {
-
+            user.role === "admin" ?            <NavItem>
+              <Link to="/toacceptevents">Do zaakceptowania</Link>
+            </NavItem> : null
+          }
+          {
             user.accessToken ?
                 <div className="ml-auto">
               {user.name}

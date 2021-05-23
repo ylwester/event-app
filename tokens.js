@@ -17,6 +17,7 @@ const sendAccessToken = (res, req, user, accesstoken) => {
         accesstoken,
         name: user.name,
         email: req.body.email,
+        role: user.role,
     })
 }
 

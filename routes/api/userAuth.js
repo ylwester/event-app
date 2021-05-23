@@ -155,6 +155,7 @@ router.post('/refresh_token', async(req, res) => {
   res.send({
     accesstoken: accesstoken,
     name: user.name,
+    role: user.role
   })
 })
 
