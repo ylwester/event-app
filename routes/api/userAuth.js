@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const {verify} = require("jsonwebtoken");
+const {isAuth} = require("./../../isAuth");
 
 const {
   createAccessToken,
@@ -158,5 +159,21 @@ router.post('/refresh_token', async(req, res) => {
     role: user.role
   })
 })
+
+// router.post('/protected', async (req, res) => {
+//   try {
+//     const auth = isAuth(req);
+//     if(auth !== null) {
+//       res.send({
+//         auth: true,
+//       })
+//     }
+//   } catch (err) {
+//     res.send({
+//       error: `${err.message}`,
+//       auth: false,
+//     })
+//   }
+// })
 
 module.exports = router;

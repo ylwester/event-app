@@ -4,8 +4,11 @@ import EventListItem from "./EventListItem.component";
 import {Button} from "reactstrap";
 import axios from "axios";
 
+import { UserContext } from "../App";
+
 
 const EventsAccept = () => {
+    const [user] = useContext(UserContext);
     const [events, setEvents] = useContext(EventContext);
     const [updatedArr, setUpdatedArr] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState(()=> {
@@ -51,6 +54,7 @@ const EventsAccept = () => {
     return (
         <div>
         {
+            user.accessToken && user.role === "admin" ?
             filteredEvents.length !== 0 ?
             filteredEvents.map((event) => (
                 <div style={{display: "flex", marginBottom: "5px"}}>
@@ -60,6 +64,7 @@ const EventsAccept = () => {
                 </Button>
                 </div>
             )) : null
+                : <p>Access denied</p>
         }
         </div>
     )

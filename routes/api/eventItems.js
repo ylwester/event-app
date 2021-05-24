@@ -96,12 +96,6 @@ router.post("/", (req, res) => {
     .then((data) => handleAddress(data.address));
 });
 
-// router.get("/:id", function (req, res) {
-//   EventItem.findById(req.params.id)
-//     .then((events) => res.json(events))
-//     .catch((err) => console.log(err));
-// });
-
 router.post("/accept/:id", function (req, res) {
     let updateResult;
     console.log(req.params.id);
@@ -118,5 +112,6 @@ router.post("/accept/:id", function (req, res) {
 
   res.send(updateResult);
 });
+
 
 module.exports = router;
