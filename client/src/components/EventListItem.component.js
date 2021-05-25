@@ -8,7 +8,7 @@ import convertData from "../libs/libs"
 const EventListItem = ({event}) => {
 
     return (
-        <Card style={{width: "35rem"}}>
+        <Card>
             <CardBody style={{padding: "10px"}}>
                 <header>
                     <div className="title">{event.title}</div>

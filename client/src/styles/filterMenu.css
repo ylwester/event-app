@@ -1,19 +1,5 @@
-.category {
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-bottom: none;
-    padding: .5rem 1rem;
-}
-
-.category.active {
-    border-top: none;
-}
-
-.category.active:hover {
-    color:black;
-}
-
-
-.list-group-item.active:hover {
-    color: black;
+.filters-menu {
+    display: flex;
+    justify-content: center;
+    padding: 15px 15px 10px 15px;
 }
