@@ -36,7 +36,7 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar className="" color="light" light expand="md">
+    <Navbar className="" color="light" light expand="md" style={{height: "7.5vh"}}>
       <NavbarBrand>
         EVENT APP
         {/*<Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>*/}

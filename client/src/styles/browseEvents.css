@@ -6,6 +6,10 @@
     flex: 1;
 }
 
+.map {
+    padding: 0;
+}
+
 .event-item {
     display: flex;
     flex-direction: column;

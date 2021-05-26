@@ -8,8 +8,8 @@ import convertData from "../libs/libs"
 const EventListItem = ({event}) => {
 
     return (
-        <Card>
-            <CardBody style={{padding: "10px"}}>
+        <Card id="event-card">
+            <CardBody style={{padding: "8px"}}>
                 <header>
                     <div className="title">{event.title}</div>
                     <div className="price">{event.paid ? event.price + "zł" : "Darmowe"}</div>
