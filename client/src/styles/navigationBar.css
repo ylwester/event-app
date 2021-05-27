@@ -1,0 +1,10 @@
+.navigation-bar {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.navigation-bar .link {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+}

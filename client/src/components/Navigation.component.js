@@ -9,8 +9,10 @@ import {
   NavbarBrand,
   NavbarToggler,
   NavItem,
+    NavLink,
   UncontrolledDropdown,
 } from "reactstrap";
+import '../styles/navigationBar.css'
 
 import {UserContext} from "../App";
 
@@ -36,7 +38,7 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar className="" color="light" light expand="md" style={{height: "7.5vh"}}>
+    <Navbar className="navigation-bar" color="light" light expand="md" style={{borderBottom: "1px solid lightgray"}}>
       <NavbarBrand>
         EVENT APP
         {/*<Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>*/}
@@ -46,18 +48,19 @@ const Navigation = () => {
         <Nav className="container-fluid" navbar>
           {
             user.accessToken ?           <NavItem>
-              <Link to="/event/add">Dodaj wydarzenie</Link>
+              <Link className="nav-link" to="/event/add">DODAJ WYDARZENIE</Link>
             </NavItem> : null
           }
+
           <NavItem>
-            <Link to="/events">Przeglądaj</Link>
+            <Link className="nav-link" to="/events">PRZEGLĄDAJ</Link>
           </NavItem>
           <NavItem>
-            <Link to="/contact">Kontakt</Link>
+            <Link className="nav-link" to="/contact">KONTAKT</Link>
           </NavItem>
           {
             user.role === "admin" ?            <NavItem>
-              <Link to="/toacceptevents">Do zaakceptowania</Link>
+              <Link className="nav-link" to="/toacceptevents">DO ZAAKCEPTOWANIA</Link>
             </NavItem> : null
           }
           {
@@ -69,14 +72,14 @@ const Navigation = () => {
                 :
                 <UncontrolledDropdown className="ml-auto" nav inNavbar>
                   <DropdownToggle nav caret>
-                    Zaloguj się
+                    ZALOGUJ SIĘ
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <Link to="/login">Zaloguj się</Link>
+                      <Link className="nav-link" to="/login">Zaloguj się</Link>
                     </DropdownItem>
                     <DropdownItem>
-                      <Link to="/register">Zarejestruj</Link>
+                      <Link className="nav-link" to="/register">Zarejestruj</Link>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>

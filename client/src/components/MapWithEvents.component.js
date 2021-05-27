@@ -7,7 +7,7 @@ import convertData from "../libs/libs";
 //Displays map with events as markers and popups.
 const MapWithEvents = ({events}) => {
     return (
-            <MapContainer center={{ lat: 50.20, lng: 19.40}} zoom={6} style={{width: "100%", height: "100%"}}>
+            <MapContainer center={{ lat: 52.20, lng: 19.20}} zoom={6} style={{width: "100%", height: "100%"}}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

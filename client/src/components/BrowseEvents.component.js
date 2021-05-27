@@ -31,7 +31,7 @@ const BrowseEvents = ({ eventCategories }) => {
               )}
           </div>
       </div>
-      <div className="col map">
+      <div className="col">
         <MapWithEvents events={result} />
       </div>
     </div>

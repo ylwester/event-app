@@ -1,5 +1,5 @@
 import {EventContext} from "../App";
-import {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import EventListItem from "./EventListItem.component";
 import {Button} from "reactstrap";
 import axios from "axios";

@@ -4,7 +4,6 @@ import '../styles/filterMenu.css';
 
 const FilterMenuComponent = ({
   events,
-  result,
   setResult,
   eventsCategories,
 }) => {
