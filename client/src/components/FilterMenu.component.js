@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomInput, Form, FormGroup, Input, Label } from "reactstrap";
-import '../styles/filterMenu.css';
+import "../styles/filterMenu.css";
 
-const FilterMenuComponent = ({
-  events,
-  setResult,
-  eventsCategories,
-}) => {
+const FilterMenuComponent = ({ events, setResult, eventsCategories }) => {
   const [filterByCategory, setFilterByCategory] = useState("");
   const [filterByPaid, setFilterByPaid] = useState("");
   const [filterByDate, setFilterByDate] = useState("");
@@ -66,52 +62,53 @@ const FilterMenuComponent = ({
   };
 
   return (
-      <div className="filters-menu">
-    <Form inline>
-      <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
-        <Input
-          type="select"
-          name="categories"
-          id="category-filter"
-          defaultValue={filterByCategory}
-          onChange={handleCategory}
-        >
-          <option value="" disabled selected hidden>Kategorie</option>
-          <option value="">Wszystkie</option>
-          {eventsCategories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
+    <div className="filters-menu">
+      <Form inline className="filters-menu-form-groups">
+        <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
+          <Input
+            type="select"
+            name="categories"
+            id="category-filter"
+            defaultValue={filterByCategory}
+            onChange={handleCategory}
+          >
+            <option value="" disabled selected hidden>
+              Kategorie
             </option>
-          ))}
-        </Input>
-      </FormGroup>
-      <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
-        <CustomInput
-          type="checkbox"
-          id="paid"
-          name="paid"
-          onClick={handlePaid}
-          label="Tylko darmowe"
-        />
-      </FormGroup>
-      <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
-        <Input
-          type="date"
-          id="day"
-          onChange={handleDate}
-
-          placeholder="Wybierz date"
-        />
-      </FormGroup>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <input
-                type="button"
-                value="Wyczyść filtry"
-                onClick={handleClearFilters}
-            />
+            <option value="">Wszystkie</option>
+            {eventsCategories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </Input>
         </FormGroup>
-    </Form>
-      </div>
+        <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
+          <CustomInput
+            type="checkbox"
+            id="paid"
+            name="paid"
+            onClick={handlePaid}
+            label="Tylko darmowe"
+          />
+        </FormGroup>
+        <FormGroup className="mb-2 mr-sm-3 mb-sm-0">
+          <Input
+            type="date"
+            id="day"
+            onChange={handleDate}
+            placeholder="Wybierz date"
+          />
+        </FormGroup>
+        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+          <input
+            type="button"
+            value="Wyczyść filtry"
+            onClick={handleClearFilters}
+          />
+        </FormGroup>
+      </Form>
+    </div>
   );
 };
 

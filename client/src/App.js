@@ -75,7 +75,6 @@ function App() {
   return (
     <UserContext.Provider value={[user, setUser]}>
       <Navigation />
-      <Route path={["/", "/home"]} exact component={HomePage} />
       <Route
         path="/event/add"
         render={(props) => (
@@ -86,6 +85,7 @@ function App() {
       <Route path="/login" render={(props) => <LoginPage {...props} />} />
       <Route path="/register" component={RegisterPage} />
         <EventContext.Provider value={[events, setEvents]}>
+            <Route path={["/", "/home"]} exact component={HomePage} />
         <Route
           exact
           path="/events"

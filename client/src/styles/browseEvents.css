@@ -6,6 +6,24 @@
     flex: 1;
 }
 
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.wrapper > * {
+    flex: 1 100%;
+    padding: 10px;
+}
+
+@media all and (min-width: 600px) {
+    .event-container { flex: 1 50% ; }
+}
+
+@media all and (min-width: 800px) {
+    .events-list { order: 1; }
+    .events-map { order: 2; }
+}
 
 .event-item {
     display: flex;

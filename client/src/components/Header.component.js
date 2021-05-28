@@ -1,10 +1,10 @@
 import {Button, Jumbotron} from "reactstrap";
+import React from "react";
 
 const HeaderComponent = () => {
   return (
       <Jumbotron>
     <header
-      className="p-5 h-25 display-3"
       style={{
         display: "flex",
         justifyContent: "center",

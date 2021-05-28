@@ -1,5 +1,17 @@
 .filters-menu {
-    display: flex;
-    justify-content: center;
+    /*display:flex;*/
+    /*justify-content: space-between;*/
     padding: 15px 15px 10px 15px;
+border-bottom: 1px solid lightgray;
+}
+
+.filters-menu-form-groups {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
 }

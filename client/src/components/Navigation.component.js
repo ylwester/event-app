@@ -38,11 +38,8 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar className="navigation-bar" color="light" light expand="md" style={{borderBottom: "1px solid lightgray"}}>
-      <NavbarBrand>
-        EVENT APP
-        {/*<Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>*/}
-      </NavbarBrand>
+    <Navbar className="navigation-bar" color="light" light expand="md">
+        <Link style={{textDecoration: 'none'}} to={'/'}>EVENT APP</Link>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="container-fluid" navbar>

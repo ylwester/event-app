@@ -1,6 +1,8 @@
 .navigation-bar {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
+    border-bottom: 1px solid lightgray;
+
 }
 
 .navigation-bar .link {

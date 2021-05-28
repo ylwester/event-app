@@ -58,7 +58,9 @@ const EventsAccept = () => {
             filteredEvents.length !== 0 ?
             filteredEvents.map((event) => (
                 <div style={{display: "flex", marginBottom: "5px"}}>
-                 <EventListItem event={event} />
+                    <div style={{width: "400px"}}>
+                        <EventListItem event={event} />
+                    </div>
                 <Button onClick={() => handleAccept(event._id)} style={{display: "inline"}}>
                     Zatwierdź
                 </Button>

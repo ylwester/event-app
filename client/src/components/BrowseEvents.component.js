@@ -11,15 +11,15 @@ const BrowseEvents = ({ eventCategories }) => {
 
 
   return (
-    <div className="flex-grid">
-      <div className="col">
+    <div className="wrapper">
+      {/*<div className="col">*/}
           <FilterMenuComponent
             events={events}
             result={result}
             setResult={setResult}
             eventsCategories={eventCategories}
           />
-          <div style={{height: "83vh", overflowY: "scroll"}}>
+          <div className="event-container events-list" style={{height: "83vh", overflowY: "scroll"}}>
               {result.length !== 0 ? (
                   result.map((event) => (
                       <div className="event-item" key={event._id}>
@@ -30,8 +30,8 @@ const BrowseEvents = ({ eventCategories }) => {
                   <p> data loading..</p>
               )}
           </div>
-      </div>
-      <div className="col">
+      {/*</div>*/}
+      <div className="event-container events-map">
         <MapWithEvents events={result} />
       </div>
     </div>
