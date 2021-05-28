@@ -1,0 +1,20 @@
+.wrapp {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.wrap {
+    /*height: calc(100vh - (40px + 1em)); !* 100% of the viewport height *!*/
+}
+
+/*.homepage-events {*/
+/*    width: 1000px;*/
+/*    height: 50vh;*/
+/*}*/
+
+
+/*@media all and (min-width: 800px) {*/
+/*    !*.events-list { order: 1; }*!*/
+/*    .homepage-events { order: 2; }*/
+/*}*/
