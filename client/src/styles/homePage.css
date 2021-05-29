@@ -8,11 +8,22 @@
     /*height: calc(100vh - (40px + 1em)); !* 100% of the viewport height *!*/
 }
 
-/*.homepage-events {*/
-/*    width: 1000px;*/
-/*    height: 50vh;*/
-/*}*/
+.content-events {
+    display: flex;
+    flex-flow: row wrap;
+    flex-basis:calc(50% - 10px); /* separate properties for IE11 upport */
+    background-color: #656565;
+    justify-content: space-evenly;
+    padding: 10px;
+    marign: 5px;
 
+}
+
+/*@media all and (max-width: 600px) {*/
+/*    .content-events{*/
+/*        display: block;*/
+/*    }*/
+/*}*/
 
 /*@media all and (min-width: 800px) {*/
 /*    !*.events-list { order: 1; }*!*/
