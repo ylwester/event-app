@@ -1,4 +1,3 @@
-import {EventContext} from "../App";
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import EventListItem from "./EventListItem.component";
 import {Button} from "reactstrap";
@@ -6,39 +5,24 @@ import axios from "axios";
 
 import { UserContext } from "../App";
 
+import { NotAcceptedEventContext } from "../App";
 
 const EventsAccept = () => {
     const [user] = useContext(UserContext);
-    const [events, setEvents] = useContext(EventContext);
+    const [events, setEvents] = useContext(NotAcceptedEventContext);
     const [updatedArr, setUpdatedArr] = useState([]);
-    const [filteredEvents, setFilteredEvents] = useState(()=> {
-        return events.filter(event =>
-            event.accepted === false
-        );
-    });
+    const [filteredEvents, setFilteredEvents] = useState(events);
 
     const handleAccept = useCallback((id) => {
         let updatedArr = [...filteredEvents];
         let findIndex = filteredEvents.findIndex(event => event._id === id);
         updatedArr[findIndex].accepted = true;
-        // filteredEvents[findIndex].accepted = true;
+            axios.post('http://localhost:5000/api/events/accept/' + id)
+                .then(response => console.log(response))
+                .catch(err => console.log(err));
         setUpdatedArr(updatedArr);
         setFilteredEvents(updatedArr);
     },[filteredEvents]);
-
-    //
-    // const handleAccept = (id) => {
-    //     let updatedArr = [...filteredEvents];
-    //     let findIndex = filteredEvents.findIndex(event => event._id === id);
-    //     updatedArr[findIndex].accepted = true;
-    //     // filteredEvents[findIndex].accepted = true;
-    //     setFilteredEvents(updatedArr);
-    //
-    //     // axios.post('http://localhost:5000/api/events/accept/' + id)
-    //     //     .then(response => console.log(response))
-    //     //     .catch(err => console.log(err));
-    // }
-
 
 
     useEffect(()=> {
@@ -65,7 +49,7 @@ const EventsAccept = () => {
                     Zatwierdź
                 </Button>
                 </div>
-            )) : null
+            )) : <p>    Brak wydarzeń oczekujących na akceptację.</p>
                 : <p>Access denied</p>
         }
         </div>

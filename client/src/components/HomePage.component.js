@@ -3,11 +3,11 @@ import "../styles/homePage.css";
 import "../App.css";
 import React, { useContext } from "react";
 
-import { EventContext } from "../App";
+import { AcceptedEventContext } from "../App";
 import { Button} from "reactstrap";
 
 const HomePage = () => {
-  const [result] = useContext(EventContext);
+  const [result] = useContext(AcceptedEventContext);
   const homePageEvents = result.slice(0, 4);
 
   return (

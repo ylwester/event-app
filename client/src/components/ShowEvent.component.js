@@ -2,11 +2,11 @@ import {useParams} from "react-router-dom";
 import React, {useContext, useState, useEffect} from "react";
 import {Container} from "reactstrap";
 
-import {EventContext} from "../App";
+import {AcceptedEventContext} from "../App";
 
 
 function ShowEvent() {
-    const [events] = useContext(EventContext);
+    const [events] = useContext(AcceptedEventContext);
     const { eventId } = useParams();
   const [event, setEvent] = useState(()=> {
       return events.filter(event => event._id === eventId);

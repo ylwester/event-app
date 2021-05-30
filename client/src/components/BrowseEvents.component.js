@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import FilterMenuComponent from "./FilterMenu.component";
 import EventListItem from "./EventListItem.component";
 import MapWithEvents from "./MapWithEvents.component";
-import { EventContext } from "../App";
+import { AcceptedEventContext } from "../App";
 import "../styles/browseEvents.css";
 
 const BrowseEvents = ({ eventCategories }) => {
-    const [events, setEvents] = useContext(EventContext);
+    const [events, setEvents] = useContext(AcceptedEventContext);
   const [result, setResult] = useState(events);
-
 
   return (
     <div className="wrapper">

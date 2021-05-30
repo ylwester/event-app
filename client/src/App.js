@@ -17,10 +17,11 @@ import EventsAccept from "./components/EventsAccept.component";
 
 axios.defaults.withCredentials = true;
 export const UserContext = createContext([]);
-export const EventContext = createContext([]);
-
+export const AcceptedEventContext = createContext([]);
+export const NotAcceptedEventContext = createContext([]);
 function App() {
-    const [events, setEvents] = useState({});
+    const [acceptedEvents, setAcceptedEvents] = useState({});
+    const [notAcceptedEvents, setNotAcceptedEvents] = useState({});
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +46,12 @@ function App() {
           .get("http://localhost:5000/api/events")
           .then((response) => {
             console.log(response.data);
-            setEvents(response.data)
+              const resAccepted = response.data.filter(event =>
+                  event.accepted === true);
+              const resNotAccepted = response.data.filter(event =>
+                  event.accepted === false);
+            setAcceptedEvents(resAccepted)
+              setNotAcceptedEvents(resNotAccepted);
           })
           .catch((err) => console.log(err));
       setLoading(false);
@@ -84,7 +90,7 @@ function App() {
       <Route path="/contact" component={ContactPage} />
       <Route path="/login" render={(props) => <LoginPage {...props} />} />
       <Route path="/register" component={RegisterPage} />
-        <EventContext.Provider value={[events, setEvents]}>
+        <AcceptedEventContext.Provider value={[acceptedEvents, setAcceptedEvents]}>
             <Route path={["/", "/home"]} exact component={HomePage} />
         <Route
           exact
@@ -97,10 +103,12 @@ function App() {
         <Route path={`/events/:eventId`}>
           <ShowEvent />
         </Route>
+    </AcceptedEventContext.Provider>
+        <NotAcceptedEventContext.Provider value={[notAcceptedEvents, setNotAcceptedEvents]}>
             <Route path={`/toacceptevents`}>
                 <EventsAccept />
             </Route>
-    </EventContext.Provider>
+        </NotAcceptedEventContext.Provider>
     </UserContext.Provider>
   );
 }
