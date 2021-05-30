@@ -17,12 +17,12 @@ const HomePage = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "blue",
+          backgroundColor: "#B9BBBC",
           padding: "20px",
         }}
       >
         <span className="text-center lead" style={{ lineHeight: "" }}>
-          <h1 style={{ lineHeight: "1" }}>Fiesta</h1>
+          <h1 style={{ lineHeight: "1" }}>Event APP</h1>
           <h2 style={{ lineHeight: "2.5" }}>
             Aplikacja stworzona by pomóc znaleźć Ci rozrywkę!
           </h2>
@@ -30,7 +30,9 @@ const HomePage = () => {
         </span>
       </header>
       <div className="homepage-content">
-        <div>Nadchodzace wydarzenia</div>
+        <div className="content-title">
+            <h2>Nadchodzace wydarzenia</h2>
+        </div>
           <div className="content-events">
         {homePageEvents.length !== 0
           ? homePageEvents.map((event) => (

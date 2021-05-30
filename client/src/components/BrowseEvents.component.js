@@ -19,7 +19,7 @@ const BrowseEvents = ({ eventCategories }) => {
             setResult={setResult}
             eventsCategories={eventCategories}
           />
-          <div className="event-container events-list" style={{height: "83vh", overflowY: "scroll"}}>
+          <div className="event-container events-list">
               {result.length !== 0 ? (
                   result.map((event) => (
                       <div className="event-item" key={event._id}>

@@ -1,22 +1,19 @@
-.wrapp {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-}
-
 .wrap {
     /*height: calc(100vh - (40px + 1em)); !* 100% of the viewport height *!*/
 }
 
 .content-events {
     display: flex;
+    align-items: center;
     flex-flow: row wrap;
-    flex-basis:calc(50% - 10px); /* separate properties for IE11 upport */
-    background-color: #656565;
     justify-content: space-evenly;
     padding: 10px;
     marign: 5px;
 
+}
+.content-title {
+    display: flex;
+    justify-content: center;
 }
 
 /*@media all and (max-width: 600px) {*/

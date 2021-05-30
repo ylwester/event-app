@@ -15,6 +15,13 @@
     flex: 1 100%;
     padding: 10px;
 }
+.events-list {
+    height: 90vh;
+    overflow-y: auto;
+}
+.content-events {
+    height: 60vh;
+}
 
 @media all and (min-width: 600px) {
     .event-container { flex: 1 50% ; }
