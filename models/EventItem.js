@@ -28,7 +28,6 @@ const eventItemSchema = new Schema({
     },
     time: {
         type: String,
-        required: true,
     },
     location: {
         latitude: Number,

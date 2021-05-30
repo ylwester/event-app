@@ -4,9 +4,11 @@ import {Container} from "reactstrap";
 
 import {AcceptedEventContext} from "../App";
 
+import {EventContext} from "../App";
+
 
 function ShowEvent() {
-    const [events] = useContext(AcceptedEventContext);
+    const [events] = useContext(EventContext);
     const { eventId } = useParams();
   const [event, setEvent] = useState(()=> {
       return events.filter(event => event._id === eventId);

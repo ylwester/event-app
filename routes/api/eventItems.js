@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 
 //Event Item Model
 const EventItem = require("../../models/EventItem");
+const addEventValidation = require("../../addEventValidation");
 
 // @route GET api/events
 // @desc Get all events json
@@ -46,7 +47,6 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const author = req.body.author;
-  console.log(author);
   const title = req.body.title;
   const description = req.body.description;
   const day = req.body.day;
@@ -58,12 +58,19 @@ router.post("/", (req, res) => {
   const price = req.body.price;
   let city;
 
+
   const handleAddress = (addr) => {
     if (addr.city) {
       city = addr.city;
     } else if (addr.town) {
       city = addr.town;
     }
+  };
+
+  try {
+    const { error } = addEventValidation(req.body);
+
+    if (error) throw new Error(error.details[0].message);
 
     const newEvent = new EventItem({
       title,
@@ -79,39 +86,47 @@ router.post("/", (req, res) => {
       city,
     });
 
+
     newEvent
       .save()
       .then(() => res.json("Event added!"))
       .catch((err) => res.status(400).json("Error: " + err));
-  };
 
-  //Gets city from coordinates
-  fetch(
-    "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
-      location.latitude +
-      "&lon=" +
-      location.longitude
-  )
-    .then((response) => response.json())
-    .then((data) => handleAddress(data.address));
+    //Gets city from coordinates
+    fetch(
+      "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
+        location.latitude +
+        "&lon=" +
+        location.longitude
+    )
+      .then((response) => response.json())
+      .then((data) => handleAddress(data.address));
+  } catch (err) {
+    res.status(400).send({
+      error: `${err.message}`,
+    });
+  }
 });
 
 router.post("/accept/:id", function (req, res) {
-    let updateResult;
-    console.log(req.params.id);
-  EventItem.findByIdAndUpdate(req.params.id, {
-      accepted: true
-  }, function (err, docs) {
-      if(err) {
-          throw new Error(err);
+  let updateResult;
+  console.log(req.params.id);
+  EventItem.findByIdAndUpdate(
+    req.params.id,
+    {
+      accepted: true,
+    },
+    function (err, docs) {
+      if (err) {
+        throw new Error(err);
       } else {
-          updateResult = docs;
-          console.log("Updated user: ", docs)
+        updateResult = docs;
+        console.log("Updated user: ", docs);
       }
-  });
+    }
+  );
 
   res.send(updateResult);
 });
-
 
 module.exports = router;

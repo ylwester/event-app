@@ -5,7 +5,7 @@ import {
   FormGroup,
   Input,
   Label,
-  Button,
+  Button, Alert,
 } from "reactstrap";
 import {MapContainer, TileLayer, Marker, useMapEvents} from "react-leaflet";
 import "../styles/addEventForm.css";
@@ -62,21 +62,15 @@ const AddEventItem = ({eventCategories}) => {
   const [location, setLocation] = useState({latitude: 0, longitude: 0});
   const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState('')
+  const [visible, setVisible] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchProtected() {
-      await axios.post('http://localhost:5000/api/users/protected',null, {
-        headers: {
-          'x-access-token': user.accessToken,
-        }
-      })
-          .then((response) => {
-            setAuth(response.data.auth);
-          })
-          .catch((err) => console.log(err));
-    }
-    fetchProtected();
-  }, [user])
+  const onDismiss = () => setVisible(false);
+
+  const handleFormError = (err) => {
+    setError(err.response.data.error);
+    setVisible(true);
+  }
 
   //Reset form inputs state to initial values
   const clearForm = () => {
@@ -202,10 +196,9 @@ const AddEventItem = ({eventCategories}) => {
 
     axios.post('http://localhost:5000/api/events/', event)
         .then((res) => {
-          console.log(res.data);
           clearForm();
         })
-        .catch(error => console.log(error));
+        .catch(err => handleFormError(err));
 
   }
 
@@ -214,6 +207,9 @@ const AddEventItem = ({eventCategories}) => {
       { user.accessToken ?
             <Container className="add-event-form">
               <h1>Dodaj nowe wydarzenie</h1>
+              <Alert color="info" isOpen={visible} toggle={onDismiss}>
+                {error ? error : null}
+              </Alert>
               <Container>
                 <Form onSubmit={handleSubmit}>
                   <FormGroup className="border-bottom" row>

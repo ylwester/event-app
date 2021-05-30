@@ -48,6 +48,7 @@ const loginValidation = data => {
             .min(6)
             .required()
         .messages({
+            'string.min': "Złe hasło, minimum 6 znaków",
             'string.empty': `Pole hasło nie może być puste`,
             'any.required': `Hasło jest wymagane`,
         }),
