@@ -63,12 +63,15 @@ const AddEventItem = ({eventCategories}) => {
   const [paid, setPaid] = useState(false);
   const [price, setPrice] = useState('')
   const [visible, setVisible] = useState(false);
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState({
+    message: null,
+    color: '',
+  });
 
   const onDismiss = () => setVisible(false);
 
   const handleFormError = (err) => {
-    setError(err.response.data.error);
+    setMessage({message: err.response.data.error, color: 'warning'})
     setVisible(true);
   }
 
@@ -81,9 +84,12 @@ const AddEventItem = ({eventCategories}) => {
     setSelectedCategories({});
     multiselectRef.current.resetSelectedValues();
     setLocation({latitude: 0, longitude: 0});
+    document.getElementById("paid").checked = false;
     setPaid(false);
     setPrice('');
-    setPriceVisibility();
+    if(priceComponent){
+      setPriceVisibility();
+    }
   }
 
 
@@ -196,6 +202,9 @@ const AddEventItem = ({eventCategories}) => {
 
     axios.post('http://localhost:5000/api/events/', event)
         .then((res) => {
+          setMessage({message: res.data, color: 'success'})
+          setVisible(true);
+          console.log(res.data); // Event added! message
           clearForm();
         })
         .catch(err => handleFormError(err));
@@ -207,8 +216,8 @@ const AddEventItem = ({eventCategories}) => {
       { user.accessToken ?
             <Container className="add-event-form">
               <h1>Dodaj nowe wydarzenie</h1>
-              <Alert color="info" isOpen={visible} toggle={onDismiss}>
-                {error ? error : null}
+              <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
+                {message.message ? message.message : null}
               </Alert>
               <Container>
                 <Form onSubmit={handleSubmit}>

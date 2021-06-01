@@ -31,7 +31,9 @@ const addEventValidation = data => {
             longitude: Joi.number(),
         },
         selectedCategories: Joi.array().min(1).messages({
-            'object.min': "Musisz wybrać kategorie",
+            'array.min': "Musisz wybrać kategorie",
+            'any.required': "Musisz wybrać kategorie",
+            'array.base': "Musisz wybrać kategorie",
         })
     }).unknown(true);
 

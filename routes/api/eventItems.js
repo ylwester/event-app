@@ -89,7 +89,7 @@ router.post("/", (req, res) => {
 
     newEvent
       .save()
-      .then(() => res.json("Event added!"))
+      .then(() => res.json("Wydarzenie zostało dodane prawidłowo i oczekuje na akceptacje administratora"))
       .catch((err) => res.status(400).json("Error: " + err));
 
     //Gets city from coordinates
