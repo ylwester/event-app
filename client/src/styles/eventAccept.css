@@ -1,0 +1,9 @@
+.event-accept-container {
+    overflow: auto;
+}
+
+
+.event-accept-buttons {
+    display: flex;
+    justify-content: center;
+}

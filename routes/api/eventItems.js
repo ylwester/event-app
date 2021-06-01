@@ -129,4 +129,20 @@ router.post("/accept/:id", function (req, res) {
   res.send(updateResult);
 });
 
+router.delete("/delete/:id", function (req, res) {
+  let id = req.params.id;
+  EventItem.findOneAndDelete({_id: id}, function (err, docs) {
+    if(err){
+      console.log(err)
+      res.send("Not deleted, "+ err)
+    }
+    else {
+      console.log("Event " + id + " deleted " + docs)
+      res.send("Event " + id + " deleted");
+    }
+  });
+
+
+})
+
 module.exports = router;
