@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import EventListItem from "./EventListItem.component";
-import {Button, Container} from "reactstrap";
+import {Alert, Button, Container} from "reactstrap";
 import axios from "axios";
 import '../styles/eventAccept.css'
 
@@ -13,14 +13,28 @@ const EventsAccept = () => {
     const [events, setEvents] = useContext(NotAcceptedEventContext);
     const [updatedArr, setUpdatedArr] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState(events);
+    const [visible, setVisible] = useState(false);
+    const [message, setMessage] = useState({
+        message: null,
+        color: '',
+    });
+
+    const onDismiss = () => setVisible(false);
 
     const handleAccept = useCallback((id) => {
         let updatedArr = [...filteredEvents];
         let findIndex = filteredEvents.findIndex(event => event._id === id);
         updatedArr[findIndex].accepted = true;
             axios.post('http://localhost:5000/api/events/accept/' + id)
-                .then(response => console.log(response))
-                .catch(err => console.log(err));
+                .then(response => {
+                    setMessage({color: "success", message: response.data})
+                    setVisible(true);
+                })
+                .catch(err => {
+                    setMessage({color: "warning", message: "Nie udało się zatwierdzić wydarzenia."})
+                    setVisible(true);
+                    console.log(err)
+                });
         setUpdatedArr(updatedArr);
         setFilteredEvents(updatedArr);
     },[filteredEvents]);
@@ -30,8 +44,15 @@ const EventsAccept = () => {
         let findIndex = filteredEvents.findIndex(event => event._id === id);
         updatedArr[findIndex].accepted = true;
         axios.delete('http://localhost:5000/api/events/delete/' + id)
-            .then(response => console.log(response))
-            .catch(err => console.log(err));
+            .then(response => {
+                console.log(response)
+                setMessage({color: "success", message: response.data})
+                setVisible(true);
+            })
+            .catch(err => {
+                setMessage({color: "warning", message: "Nie udało się usunąć wydarzenia."})
+                console.log(err)
+            });
         setUpdatedArr(updatedArr);
         setFilteredEvents(updatedArr);
     },[filteredEvents]);
@@ -49,6 +70,12 @@ const EventsAccept = () => {
 
     return (
         <Container className="event-accept-container">
+            <div>
+                <h4>Do zaakceptowania</h4>
+            </div>
+            <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
+                {message.message}
+            </Alert>
         {
             user.accessToken && user.role === "admin" ?
             filteredEvents.length !== 0 ?

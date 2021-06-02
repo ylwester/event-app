@@ -1,0 +1,9 @@
+.contact-form-container {
+    margin: 0 auto;
+    width: 100vh;
+    height: 600px;
+}
+
+.contact-form {
+    width: 100%;
+}
