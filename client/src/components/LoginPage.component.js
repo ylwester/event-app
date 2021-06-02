@@ -1,6 +1,6 @@
 import { Button, Col, Form, FormGroup, Input, Label, Alert } from "reactstrap";
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 
 import { UserContext } from "../App";
 
