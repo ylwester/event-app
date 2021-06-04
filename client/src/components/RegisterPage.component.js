@@ -27,6 +27,7 @@ const RegisterPage = () => {
     }
 
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
 

@@ -51,17 +51,18 @@ function LocalizeMe({ map }) {
 
 
 const AddEventItem = ({eventCategories}) => {
-  const [auth, setAuth] = useState();
+  const [auth] = useState();
   const [user] = useContext(UserContext);
   const [map, setMap] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [day, setDay] = useState('');
   const [time, setTime] = useState('');
+  const [street, setStreet] = useState('');
   const [selectedCategories, setSelectedCategories] = useState({});
   const [location, setLocation] = useState({latitude: 0, longitude: 0});
   const [paid, setPaid] = useState(false);
-  const [price, setPrice] = useState('')
+  const [price, setPrice] = useState('');
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState({
     message: null,
@@ -81,6 +82,7 @@ const AddEventItem = ({eventCategories}) => {
     setDescription('');
     setDay('');
     setTime('');
+    setStreet('');
     setSelectedCategories({});
     multiselectRef.current.resetSelectedValues();
     setLocation({latitude: 0, longitude: 0});
@@ -99,7 +101,7 @@ const AddEventItem = ({eventCategories}) => {
 
       if (!paid) document.getElementById("paid").checked = false;
     }
-  }, [paid, day])
+  }, [auth, paid, day])
 
 
 
@@ -138,7 +140,6 @@ const AddEventItem = ({eventCategories}) => {
       },
     });
 
-    console.log(position);
 
     return (
         position.latitude !== 0 ? (
@@ -172,7 +173,6 @@ const AddEventItem = ({eventCategories}) => {
   const categoriesSelect = () => {
     const selected = multiselectRef.current.getSelectedItems();
     setSelectedCategories(selected);
-    console.log(selected);
   }
 
   const handleSubmit = (e) => {
@@ -181,15 +181,13 @@ const AddEventItem = ({eventCategories}) => {
     if(!paid){
       setPrice('');
     }
-    console.log(paid);
-
-    console.log(user);
 
     const event = {
       author: user.name,
       title,
       description,
       day,
+      street,
       dayDate: day,
       time,
       location,
@@ -198,13 +196,11 @@ const AddEventItem = ({eventCategories}) => {
       price
     }
 
-    console.log(event);
 
     axios.post('http://localhost:5000/api/events/', event)
         .then((res) => {
           setMessage({message: res.data, color: 'success'})
           setVisible(true);
-          console.log(res.data); // Event added! message
           clearForm();
         })
         .catch(err => handleFormError(err));
@@ -271,6 +267,17 @@ const AddEventItem = ({eventCategories}) => {
                       <Input type="text" id="time" placeholder="HH:mm" pattern='([01]?[0-9]|2[0-3]):[0-5][0-9]'
                              value={time} onChange={(e) => {
                         setTime(e.target.value)
+                      }}/>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row className="border-bottom">
+                    <Label for="street" sm={2}>
+                      Adres
+                    </Label>
+                    <Col sm={8}>
+                      <Input type="text" id="street" placeholder="Ulica, numer budynku..."
+                             value={street} onChange={(e) => {
+                        setStreet(e.target.value);
                       }}/>
                     </Col>
                   </FormGroup>

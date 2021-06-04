@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const {verify} = require("jsonwebtoken");
-const {isAuth} = require("./../../isAuth");
 
 const {
   createAccessToken,
@@ -21,17 +20,14 @@ router.post("/register", async (req, res) => {
   //Validate sent data
   const { error } = registerValidation(req.body);
   if (error) throw new Error(error.details[0].message);
-    // return res.status(400).json(error.details[0].message);
 
   //Check if username in DB
   const usernameExist = await User.findOne({ email: req.body.name });
   if (usernameExist) throw new Error("Nazwa użytkownika jest już zajęta");
-  // return res.status(400).send("Nazwa użytkownika jest już zajęta");
 
   //Check if email in DB
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) throw new Error("Konto z tym adresem email już istnieje");
-  // return res.status(400).send("Konto z tym adresem email już istnieje");
 
   //Encrypt passwords
   const salt = await bcrypt.genSalt(10);
@@ -48,27 +44,6 @@ router.post("/register", async (req, res) => {
     const savedUser = await user.save(function (err){
       if(err) return err;
     });
-
-    // const savedUser = await user.save().then((user) => {
-    //   jwt.sign(
-    //     {
-    //       _id: user._id,
-    //     },
-    //     process.env.TOKEN_SECRET,
-    //       {expiresIn: 3600},
-    //       (err, token) => {
-    //           if(err) throw err;
-    //         res.json({
-    //             token,
-    //             user: {
-    //                 _id: user._id,
-    //                 name: user.name,
-    //                 email: user.email
-    //             }
-    //         })
-    //       }
-    //   );
-    // });
 
     res.send(savedUser);
   } catch (err) {
@@ -99,7 +74,6 @@ router.post("/login", async (req, res) => {
     //Put refresh token in DB
     user.refreshToken = refreshtoken;
     user.save();
-    console.log(user);
 
     //Send token, refresh as a cookie, access as response.
     sendRefreshToken(res, refreshtoken);
@@ -159,21 +133,5 @@ router.post('/refresh_token', async(req, res) => {
     role: user.role
   })
 })
-
-// router.post('/protected', async (req, res) => {
-//   try {
-//     const auth = isAuth(req);
-//     if(auth !== null) {
-//       res.send({
-//         auth: true,
-//       })
-//     }
-//   } catch (err) {
-//     res.send({
-//       error: `${err.message}`,
-//       auth: false,
-//     })
-//   }
-// })
 
 module.exports = router;

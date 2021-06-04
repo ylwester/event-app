@@ -26,6 +26,9 @@ const eventItemSchema = new Schema({
         type: Date,
         required: true,
     },
+    street: {
+      type: String,
+    },
     time: {
         type: String,
     },

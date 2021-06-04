@@ -20,7 +20,7 @@ const ContactPage = () => {
             </div>
             <div className="mb-3">
                 <label htmlFor="contact-form-message" className="form-label">Wiadomość</label>
-                <textarea className="form-control" id="contact-form-message" rows="3" />
+                <textarea className="form-control" id="contact-form-message" rows="7" />
             </div>
             <button type="submit" className="btn btn-secondary mb-3">
                 Wyślij

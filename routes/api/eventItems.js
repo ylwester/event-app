@@ -52,14 +52,15 @@ router.post("/", (req, res) => {
   const day = req.body.day;
   const dayDate = req.body.day;
   const time = req.body.time;
+  const street = req.body.street;
   const location = req.body.location;
   const categories = req.body.selectedCategories;
   const paid = req.body.paid;
   const price = req.body.price;
   let city;
 
-
   const handleAddress = (addr) => {
+    console.log(addr)
     if (addr.city) {
       city = addr.city;
     } else if (addr.town) {
@@ -72,35 +73,42 @@ router.post("/", (req, res) => {
 
     if (error) throw new Error(error.details[0].message);
 
-    const newEvent = new EventItem({
-      title,
-      author,
-      description,
-      day,
-      dayDate,
-      time,
-      location,
-      categories,
-      paid,
-      price,
-      city,
-    });
-
-
-    newEvent
-      .save()
-      .then(() => res.json("Wydarzenie zostało dodane prawidłowo i oczekuje na akceptacje administratora"))
-      .catch((err) => res.status(400).json("Error: " + err));
-
     //Gets city from coordinates
     fetch(
-      "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
+        "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
         location.latitude +
         "&lon=" +
         location.longitude
     )
-      .then((response) => response.json())
-      .then((data) => handleAddress(data.address));
+        .then(response =>
+            response.json()
+        )
+        .then((data) => {
+          handleAddress(data.address);
+
+          const newEvent = new EventItem({
+            title,
+            author,
+            description,
+            day,
+            dayDate,
+            time,
+            street,
+            location,
+            categories,
+            paid,
+            price,
+            city,
+          });
+
+
+          newEvent
+              .save()
+              .then(() => res.json("Wydarzenie zostało dodane prawidłowo i oczekuje na akceptacje administratora"))
+              .catch((err) => res.status(400).json("Error: " + err));
+
+        });
+
   } catch (err) {
     res.status(400).send({
       error: `${err.message}`,
@@ -109,10 +117,9 @@ router.post("/", (req, res) => {
 });
 
 router.post("/accept/:id", function (req, res) {
-  let updateResult;
-  console.log(req.params.id);
+  let id = req.params.id;
   EventItem.findByIdAndUpdate(
-    req.params.id,
+    id,
     {
       accepted: true,
     },
@@ -120,13 +127,10 @@ router.post("/accept/:id", function (req, res) {
       if (err) {
         throw new Error(err);
       } else {
-        updateResult = docs;
-        console.log("Updated user: ", docs);
+        res.send("Event " + id + " accepted")
       }
     }
   );
-
-  res.send(updateResult);
 });
 
 router.delete("/delete/:id", function (req, res) {

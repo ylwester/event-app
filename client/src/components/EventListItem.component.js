@@ -29,7 +29,7 @@ const EventListItem = ({event}) => {
                         </div>
                     </div>
                     <div id="full-post">
-                        <Link to={location => `/events/${event._id}`} >Zobacz więcej</Link>
+                        <Link to={`/events/${event._id}`} >Zobacz więcej</Link>
                     </div>
                 </div>
             </CardBody>

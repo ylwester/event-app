@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import FilterMenuComponent from "./FilterMenu.component";
 import EventListItem from "./EventListItem.component";
 import MapWithEvents from "./MapWithEvents.component";
@@ -11,7 +11,6 @@ const BrowseEvents = ({ eventCategories }) => {
 
   return (
     <div className="wrapper">
-      {/*<div className="col">*/}
           <FilterMenuComponent
             events={events}
             result={result}
@@ -26,10 +25,9 @@ const BrowseEvents = ({ eventCategories }) => {
                       </div>
                   ))
               ) : (
-                  <p> data loading..</p>
+                  <p> Wczytywanie wydarzeń...</p>
               )}
           </div>
-      {/*</div>*/}
       <div className="event-container events-map">
         <MapWithEvents events={result} />
       </div>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect, useState, createContext } from "react";
+import { Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -35,7 +35,6 @@ function App() {
           withCredentials: true,
         })
         .then((response) => {
-          console.log(response);
           setUser({
             name: response.data.name,
             accessToken: response.data.accesstoken,
@@ -47,7 +46,6 @@ function App() {
       await axios
         .get("http://localhost:5000/api/events")
         .then((response) => {
-          console.log(response.data);
           const resAccepted = response.data.filter(
             (event) => event.accepted === true
           );

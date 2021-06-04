@@ -38,7 +38,6 @@ const LoginPage = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setUser({
           name: response.data.name,
           accessToken: response.data.accesstoken,

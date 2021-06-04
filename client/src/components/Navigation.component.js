@@ -6,10 +6,8 @@ import {
   DropdownToggle,
   Nav,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
   NavItem,
-    NavLink,
   UncontrolledDropdown,
 } from "reactstrap";
 import '../styles/navigationBar.css'
@@ -27,7 +25,6 @@ const Navigation = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   const logOutCallback = async () => {
-    console.log(user);
     await axios.post('http://localhost:5000/api/users/logout', '', {
       withCredentials: true,
     })

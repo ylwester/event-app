@@ -21,6 +21,8 @@ mongoose
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.log(err));
 
+mongoose.set('useFindAndModify', false);
+
 app.use(cookieParser());
 
 app.use(express.json());

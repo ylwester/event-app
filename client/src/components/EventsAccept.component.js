@@ -15,7 +15,7 @@ const EventsAccept = () => {
     const [filteredEvents, setFilteredEvents] = useState(events);
     const [visible, setVisible] = useState(false);
     const [message, setMessage] = useState({
-        message: null,
+        message: '',
         color: '',
     });
 
@@ -31,9 +31,8 @@ const EventsAccept = () => {
                     setVisible(true);
                 })
                 .catch(err => {
-                    setMessage({color: "warning", message: "Nie udało się zatwierdzić wydarzenia."})
+                    setMessage({color: "warning", message: err})
                     setVisible(true);
-                    console.log(err)
                 });
         setUpdatedArr(updatedArr);
         setFilteredEvents(updatedArr);
@@ -45,13 +44,12 @@ const EventsAccept = () => {
         updatedArr[findIndex].accepted = true;
         axios.delete('http://localhost:5000/api/events/delete/' + id)
             .then(response => {
-                console.log(response)
                 setMessage({color: "success", message: response.data})
                 setVisible(true);
             })
             .catch(err => {
-                setMessage({color: "warning", message: "Nie udało się usunąć wydarzenia."})
-                console.log(err)
+                setMessage({color: "warning", message: err})
+                setVisible(true);
             });
         setUpdatedArr(updatedArr);
         setFilteredEvents(updatedArr);
@@ -62,11 +60,8 @@ const EventsAccept = () => {
         const res = events.filter(event =>
             event.accepted === false
         );
-        console.log(res);
         setFilteredEvents(res);
     }, [events, updatedArr]);
-
-    //TODO alerty w odpowiedzi po usunieciu/akceptacji
 
     return (
         <Container className="event-accept-container">

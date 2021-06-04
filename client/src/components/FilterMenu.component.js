@@ -33,12 +33,10 @@ const FilterMenuComponent = ({ events, setResult, eventsCategories }) => {
         (!filterByPaid || event.paid.toString() === filterByPaid) &&
         (!filterByDate || event.day === filterByDate)
     );
-    console.log(res);
     setResult(res);
   }, [filterByCategory, filterByPaid, filterByDate, events, setResult]);
 
   const handleCategory = (e) => {
-    console.log(e.target.value);
     setFilterByCategory(e.target.value);
   };
 
@@ -48,7 +46,6 @@ const FilterMenuComponent = ({ events, setResult, eventsCategories }) => {
     } else {
       setFilterByPaid("");
     }
-    console.log(filterByPaid);
   };
 
   const handleDate = (e) => {
