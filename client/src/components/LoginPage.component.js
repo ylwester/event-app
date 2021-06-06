@@ -87,6 +87,11 @@ const LoginPage = () => {
         </FormGroup>
         <Button type="submit">Zatwierdź</Button>
       </Form>
+      <div>
+        <p>Testowy użytkownik z adminem:</p>
+        <p>login: test@test.pl</p>
+        <p>hasło:test123</p>
+      </div>
     </div>
   );
 };

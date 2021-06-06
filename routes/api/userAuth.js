@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
   if (error) throw new Error(error.details[0].message);
 
   //Check if username in DB
-  const usernameExist = await User.findOne({ email: req.body.name });
+  const usernameExist = await User.findOne({ name: req.body.name });
   if (usernameExist) throw new Error("Nazwa użytkownika jest już zajęta");
 
   //Check if email in DB
@@ -41,11 +41,10 @@ router.post("/register", async (req, res) => {
   });
 
 
-    const savedUser = await user.save(function (err){
-      if(err) return err;
-    });
+    const savedUser = await user.save()
+        .then(() => res.json("Konto zostało założone, możesz się zalogować."))
+        .catch((err) => res.status(400).json("Error: " + err));
 
-    res.send(savedUser);
   } catch (err) {
     res.status(400).send({
       error: `${err.message}`

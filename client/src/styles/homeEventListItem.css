@@ -16,6 +16,16 @@
     width: 100%;
     border-bottom: 1px solid darkgray;
 }
+#title-link {
+    text-decoration: none;
+    color: black
+}
+
+#title-link:hover {
+    text-decoration: none;
+    color: #344f58;
+}
+
 
 .home-categories {
     display: flex;

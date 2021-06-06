@@ -2,13 +2,14 @@ import React from "react";
 import '../styles/homeEventListItem.css'
 
 import convertData from "../libs/libs"
+import {Link} from "react-router-dom";
 
 const HomeEventListItem = ({event}) => {
 
     return (
         <div className="home-event-item">
             <div className="home-title">
-                <h5>{event.title}</h5>
+                <Link id="title-link" to={`/events/${event._id}`} ><h5>{event.title}</h5></Link>
             </div>
             <div className="home-categories">
                     {event.categories.map(category =>

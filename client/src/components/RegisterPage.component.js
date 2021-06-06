@@ -7,9 +7,12 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [visible, setVisible] = useState(false);
     const [error, setError] = useState(null);
-
+    const [visible, setVisible] = useState(false);
+    const [message, setMessage] = useState({
+        message: null,
+        color: '',
+    });
 
     const onDismiss = () => setVisible(false);
 
@@ -22,7 +25,7 @@ const RegisterPage = () => {
     }
 
     const handleFormError = (err) => {
-        setError(err.response.data.error);
+        setMessage({message: err.response.data.error, color: 'warning'})
         setVisible(true);
     }
 
@@ -40,7 +43,11 @@ const RegisterPage = () => {
 
 
         axios.post('http://localhost:5000/api/users/register',  user)
-            .then(response => console.log(response))
+            .then((res) => {
+                console.log(res);
+                setMessage({message: res.data, color: 'success'})
+                setVisible(true);
+            })
             .catch(err => handleFormError(err));
     }
 
@@ -48,8 +55,8 @@ const RegisterPage = () => {
     return (
         <div style={{margin: "auto", width: "50vh"}}>
             <h1>Zarejestruj się</h1>
-            <Alert color="info" isOpen={visible} toggle={onDismiss}>
-                {error ? error : null}
+            <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
+                {message.message ? message.message : null}
             </Alert>
             <Form onSubmit={handleSubmit}>
                 <FormGroup row>
