@@ -33,12 +33,6 @@ mongoose.set('useFindAndModify', false);
 //     })
 // }
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
-
 
 app.use(cookieParser());
 
@@ -70,6 +64,13 @@ app.use(function (req, res, next) {
 //Routes
 app.use("/api/events/", eventItems);
 app.use("/api/users", userAuth);
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
 
 app.get("/", (req, res) => {
   res.send(`<h1>Hello</h1>`);
