@@ -44,8 +44,9 @@ function App() {
     }
     async function getEventsFromApi() {
       await axios
-        .get("/api/events")
+        .get(process.env.baseURL || "/api/events")
         .then((response) => {
+            console.log(response);
           const resAccepted = response.data.filter(
             (eventy) => eventy.accepted === true
           );
