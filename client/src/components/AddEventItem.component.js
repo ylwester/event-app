@@ -197,7 +197,7 @@ const AddEventItem = ({eventCategories}) => {
     }
 
 
-    axios.post('http://localhost:5000/api/events/', event)
+    axios.post('/api/events/', event)
         .then((res) => {
           setMessage({message: res.data, color: 'success'})
           setVisible(true);

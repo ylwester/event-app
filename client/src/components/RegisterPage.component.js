@@ -42,7 +42,7 @@ const RegisterPage = () => {
         }
 
 
-        axios.post('http://localhost:5000/api/users/register',  user)
+        axios.post('/api/users/register',  user)
             .then((res) => {
                 console.log(res);
                 setMessage({message: res.data, color: 'success'})

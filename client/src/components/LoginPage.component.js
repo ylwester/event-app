@@ -31,7 +31,7 @@ const LoginPage = () => {
     };
 
     await axios
-      .post("http://localhost:5000/api/users/login", user, {
+      .post("/api/users/login", user, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

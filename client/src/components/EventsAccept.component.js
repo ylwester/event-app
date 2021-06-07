@@ -25,7 +25,7 @@ const EventsAccept = () => {
         let updatedArr = [...filteredEvents];
         let findIndex = filteredEvents.findIndex(event => event._id === id);
         updatedArr[findIndex].accepted = true;
-            axios.post('http://localhost:5000/api/events/accept/' + id)
+            axios.post('/api/events/accept/' + id)
                 .then(response => {
                     setMessage({color: "success", message: response.data})
                     setVisible(true);
@@ -42,7 +42,7 @@ const EventsAccept = () => {
         let updatedArr = [...filteredEvents];
         let findIndex = filteredEvents.findIndex(event => event._id === id);
         updatedArr[findIndex].accepted = true;
-        axios.delete('http://localhost:5000/api/events/delete/' + id)
+        axios.delete('/api/events/delete/' + id)
             .then(response => {
                 setMessage({color: "success", message: response.data})
                 setVisible(true);
