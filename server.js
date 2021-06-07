@@ -25,7 +25,6 @@ mongoose
 
 mongoose.set('useFindAndModify', false);
 
-
 app.use(cookieParser());
 
 app.use(express.json());
