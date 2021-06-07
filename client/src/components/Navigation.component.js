@@ -25,7 +25,7 @@ const Navigation = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   const logOutCallback = async () => {
-    await axios.post('http://localhost:5000/api/users/logout', '', {
+    await axios.post('/api/users/logout', '', {
       withCredentials: true,
     })
         .then(()=> {
