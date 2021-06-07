@@ -10,7 +10,7 @@ ReactDOM.render(
           <QueryParamProvider ReactRouterRoute={Route}>
               <App />
           </QueryParamProvider>
-      </Router>
+      </Router>,
   document.getElementById('root')
 );
 
