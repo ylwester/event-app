@@ -47,10 +47,10 @@ function App() {
         .get("/api/events")
         .then((response) => {
           const resAccepted = response.data.filter(
-            (event) => event.accepted === true
+            (eventy) => eventy.accepted === true
           );
           const resNotAccepted = response.data.filter(
-            (event) => event.accepted === false
+            (eventy) => eventy.accepted === false
           );
           setAcceptedEvents(resAccepted);
           setNotAcceptedEvents(resNotAccepted);
