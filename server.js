@@ -9,12 +9,13 @@ const path = require('path')
 
 const app = express();
 const PORT = 5000;
+const uri = process.env.MONGODB_URI;
 
 dotenv.config();
 
 //Database connection
 mongoose
-  .connect(process.env.DB_CONNECT, {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
