@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     async function checkRefreshToken() {
       await axios
-        .post("http://localhost:5000/api/users/refresh_token", "", {
+        .post(process.env.baseURL || "/api/users/refresh_token", "", {
           withCredentials: true,
         })
         .then((response) => {
@@ -44,7 +44,7 @@ function App() {
     }
     async function getEventsFromApi() {
       await axios
-        .get("http://localhost:5000/api/events")
+        .get("/api/events")
         .then((response) => {
           const resAccepted = response.data.filter(
             (event) => event.accepted === true
