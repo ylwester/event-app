@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const HomeEventListItem = ({event}) => {
 
     return (
-        <div className="home-event-item">
+        <div className="home-event-item" key={event._id}>
             <div className="home-title">
                 <Link id="title-link" to={`/events/${event._id}`} ><h5>{event.title}</h5></Link>
             </div>

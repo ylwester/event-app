@@ -54,7 +54,7 @@ const RegisterPage = () => {
 
     return (
         <div style={{margin: "auto", width: "50vh"}}>
-            <h1>Zarejestruj się</h1>
+            <h3 style={{padding: "10px 0 10px 0"}}>Zarejestruj się</h3>
             <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
                 {message.message ? message.message : null}
             </Alert>

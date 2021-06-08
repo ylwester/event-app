@@ -63,10 +63,14 @@ const EventsAccept = () => {
         setFilteredEvents(res);
     }, [events, updatedArr]);
 
+    const refreshPage = () => {
+        window.location.reload()
+    }
+
     return (
         <Container className="event-accept-container">
             <div>
-                <h4>Do zaakceptowania</h4>
+                <h4 style={{padding: "10px 0 10px 0"}}>Do zaakceptowania</h4>
             </div>
             <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
                 {message.message}
@@ -88,7 +92,11 @@ const EventsAccept = () => {
                         </Button>
                     </div>
                 </div>
-            )) : <p>    Brak wydarzeń oczekujących na akceptację.</p>
+            )) : <div>
+                    <p>Brak wydarzeń oczekujących na akceptację.</p>
+                <p>Odśwież by zobaczyć nowe wydarzenia. </p>
+                    <button onClick={refreshPage}>Odswież</button>
+            </div>
                 : <p>Access denied</p>
         }
         </Container>

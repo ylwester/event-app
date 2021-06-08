@@ -4,6 +4,7 @@ import {Container} from "reactstrap";
 import convertData from "../libs/libs"
 import {EventContext} from "../App";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import './../styles/showEvent.css';
 
 function ShowEvent() {
     const [events] = useContext(EventContext);
@@ -29,22 +30,31 @@ function ShowEvent() {
   return (
     <Container className="themed-container" fluid="lg">
             <div>
-                <div>
-                    <h1>{event.title}</h1>
+                <div className="show-container">
+                    <div>
+                        <h3>{event.title}</h3>
+                    </div>
+                    <div>
+                        <p style={{margin: 0, fontSize: "0.9rem"}}>Dodane przez: {event.author}, dnia {createdAt.toLocaleDateString()}</p>
+                    </div>
                 </div>
-                <div>
-                    <p>Dodane przez: {event.author}, dnia {createdAt.toLocaleDateString()}</p>
-                </div>
-                <div>
+                <h5>Opis</h5>
+                <div className="show-container">
                     <span style={{whiteSpace: "pre-wrap"}}>{event.description}</span>
                 </div>
-                <div>
-                    <p>Szczegóły wydarzenia:</p>
-                    <p>Ulica: {event.street}</p>
-                    <p>Kiedy się odbywa: {convertData(event.day)}{event.time ? ", " + event.time : null}</p>
+                <h5>Szczegóły</h5>
+                <div className="show-container details">
+                    <div style={{width: "50%"}}>
+                        <p>Data: {convertData(event.day)}</p>
+                        <p>Godzina: {event.time ? event.time : null}</p>
+                    </div>
+                    <div style={{width: "50%"}}>
+                        <p>Ulica: {event.street}</p>
+                        <p>Miasto: {event.city}</p>
+                    </div>
                 </div>
-                Lokalizacja:
-                <div style={{height: "200px", width: "100%"}}>
+                <h5>Lokalizacja</h5>
+                <div className="show-container" style={{height: "200px"}}>
                         <MapContainer center={{lat: event.location.latitude, lng: event.location.longitude}}
                                       zoom={13} style={{width: "100%", height: "100%"}}>
                             <TileLayer

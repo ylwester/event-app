@@ -50,7 +50,7 @@ const LoginPage = () => {
 
   return (
     <div style={{ margin: "auto", width: "50vh" }}>
-      <h1>Zaloguj się</h1>
+      <h3 style={{padding: "10px 0 10px 0"}}>Zaloguj się</h3>
       <Alert color="info" isOpen={visible} toggle={onDismiss}>
         {error ? error : null}
       </Alert>

@@ -211,7 +211,7 @@ const AddEventItem = ({eventCategories}) => {
       <div>
       { user.accessToken ?
             <Container className="add-event-form">
-              <h1>Dodaj nowe wydarzenie</h1>
+              <h3 style={{padding: "10px 0 10px 0"}}>Dodaj nowe wydarzenie</h3>
               <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
                 {message.message ? message.message : null}
               </Alert>

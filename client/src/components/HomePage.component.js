@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 
 import { AcceptedEventContext } from "../App";
 import { Button} from "reactstrap";
+import {Link} from "react-router-dom";
 
 const HomePage = () => {
   const [result] = useContext(AcceptedEventContext);
@@ -26,12 +27,12 @@ const HomePage = () => {
           <h2 style={{ lineHeight: "2.5" }}>
             Aplikacja stworzona by pomóc znaleźć Ci rozrywkę!
           </h2>
-          <Button>Dowiedz się więcej</Button>
+          <Link to="/events"><Button>Przeglądaj wydarzenia</Button></Link>
         </span>
       </header>
       <div className="homepage-content">
         <div className="content-title">
-            <h2>Nadchodzace wydarzenia</h2>
+            <h2 style={{padding: "10px"}}>Nadchodzace wydarzenia</h2>
         </div>
           <div className="content-events">
         {homePageEvents.length !== 0

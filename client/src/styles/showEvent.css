@@ -1,0 +1,15 @@
+.show-container {
+    padding: 10px;
+    background-color: #FFF;
+    /*FFFAEE*/
+    border-radius: 15px;
+    margin: 10px;
+    -webkit-box-shadow: -1px 13px 26px -12px rgba(0,0,0,0.6);
+    -moz-box-shadow: -1px 13px 26px -12px rgba(0,0,0,0.6);
+    box-shadow: -1px 13px 26px -12px rgba(0,0,0,0.6);
+}
+
+.show-container.details {
+    display: flex;
+    justify-content: space-around;
+}
