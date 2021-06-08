@@ -59,7 +59,7 @@ const Navigation = () => {
           }
           {
             user.accessToken ?
-                <div className="ml-auto">
+                <div className="ml-auto" style={{paddingRight: "10px"}}>
               {user.name}
                   <input type="button" onClick={logOutCallback} value="Wyloguj się" />
             </div>
