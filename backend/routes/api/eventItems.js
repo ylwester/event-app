@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 const EventItem = require("../../models/EventItem");
 const addEventValidation = require("../../addEventValidation");
 
-// @route GET api/events
+// @route GET api/eventsnp
 // @desc Get all events json
 
 function getTodayDateToInput() {

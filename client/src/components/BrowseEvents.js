@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import FilterMenuComponent from "./FilterMenu.component";
-import EventListItem from "./EventListItem.component";
-import MapWithEvents from "./MapWithEvents.component";
+import FilterMenuComponent from "./FilterMenu";
+import EventListItem from "./EventListItem";
+import MapWithEvents from "./MapWithEvents";
 import { AcceptedEventContext } from "../App";
 import "../styles/browseEvents.css";
 

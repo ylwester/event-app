@@ -1,4 +1,4 @@
-import HomeEventListItem from "./HomeEventListItem.component";
+import HomeEventListItem from "./HomeEventListItem";
 import "../styles/homePage.css";
 import "../App.css";
 import React, { useContext } from "react";

@@ -7,18 +7,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "client-install": "npm install --prefix ../client",
     "start": "node server.js",
-    "server": "nodemon server.js --ignore client",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client \"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "server": "../node_modules/.bin/nodemon server.js --ignore client",
+    "client": "npm start --prefix ../client",
+    "dev": "../node_modules/.bin/concurrently \\\"npm run server\\\" \\\"npm run client \\\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../client && npm run build --prefix client"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@hookstate/core": "^3.0.7",
     "bcryptjs": "^2.4.3",
-    "concurrently": "^6.0.1",
+    "concurrently": "^6.4.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^9.0.0",
@@ -28,6 +28,7 @@
     "mongoose": "^5.12.3",
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.6.1",
+    "nodemon": "^2.0.15",
     "react": "^17.0.2"
   },
   "keywords": [],

@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import convertData from "../libs/libs"
 
 const EventListItem = ({event}) => {
-
     return (
         <Card id="event-card">
             <CardBody style={{padding: "8px"}}>
@@ -15,7 +14,9 @@ const EventListItem = ({event}) => {
                     <div className="price">{event.paid ? event.price + "zł" : "Darmowe"}</div>
                 </header>
                 <div id="middle-wrapper">
-                    <div className="event-data">{convertData(event.day)}{event.time ? ", " + event.time : null}</div>
+                    <div className="event-data">
+                        {convertData(event.day)}{event.time ? ", " + event.time : null}
+                    </div>
                     <div id="location">
                         {event.city}
                     </div>

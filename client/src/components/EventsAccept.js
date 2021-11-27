@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from "react";
-import EventListItem from "./EventListItem.component";
+import EventListItem from "./EventListItem";
 import {Alert, Button, Container} from "reactstrap";
 import axios from "axios";
 import '../styles/eventAccept.css'

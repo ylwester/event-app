@@ -5,15 +5,15 @@ import "./App.css";
 
 import axios from "axios";
 
-import BrowseEvents from "./components/BrowseEvents.component";
-import HomePage from "./components/HomePage.component";
-import AddEventItem from "./components/AddEventItem.component";
-import ContactPage from "./components/ContactPage.component";
-import LoginPage from "./components/LoginPage.component";
-import RegisterPage from "./components/RegisterPage.component";
-import Navigation from "./components/Navigation.component";
-import ShowEvent from "./components/ShowEvent.component";
-import EventsAccept from "./components/EventsAccept.component";
+import BrowseEvents from "./components/BrowseEvents";
+import HomePage from "./components/HomePage";
+import AddEventItem from "./components/AddEventItem";
+import ContactPage from "./components/ContactPage";
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
+import Navigation from "./components/Navigation";
+import ShowEvent from "./components/ShowEvent";
+import EventsAccept from "./components/EventsAccept";
 
 axios.defaults.withCredentials = true;
 export const UserContext = createContext([]);

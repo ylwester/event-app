@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.13.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.0",
     "@hookstate/core": "^3.0.7",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
@@ -38,17 +39,14 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:5000/"
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "proxy": "http://localhost:5000/",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0"
+  }
 }

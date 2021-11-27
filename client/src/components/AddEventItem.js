@@ -13,7 +13,7 @@ import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
 import { Multiselect } from "multiselect-react-dropdown";
 
 
-import useVisibilityChange from "./VisibilityChange";
+import useVisibilityChange from "../libs/VisibilityChange";
 import axios from "axios";
 
 import { UserContext } from "../App";
