@@ -10,7 +10,7 @@ const {
   sendRefreshToken,
 } = require("../../tokens");
 
-const { registerValidation, loginValidation } = require("../../authValidation");
+const { registerValidation, loginValidation } = require("../../validations/authValidation");
 const bcrypt = require("bcryptjs");
 
 //Register

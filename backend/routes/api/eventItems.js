@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 
 //Event Item Model
 const EventItem = require("../../models/EventItem");
-const addEventValidation = require("../../addEventValidation");
+const addEventValidation = require("../../validations/addEventValidation");
 
 // @route GET api/eventsnp
 // @desc Get all events json

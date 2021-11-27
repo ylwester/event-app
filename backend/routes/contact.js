@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const contactValidation = require("../contactValidation");
+const contactValidation = require("../validations/contactValidation");
 const nodemailer = require('nodemailer');
 
 
