@@ -55,10 +55,8 @@ router.post("/register", async (req, res) => {
 //Login
 router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
-
   try {
   if (error) throw new Error(error.details[0].message);
-
     const user = await User.findOne({ email: req.body.email });
     if (!user) throw new Error("Nieprawidłowy email lub hasło");
 
@@ -77,7 +75,6 @@ router.post("/login", async (req, res) => {
     //Send token, refresh as a cookie, access as response.
     sendRefreshToken(res, refreshtoken);
     sendAccessToken(res, req, user, accesstoken);
-
 
   } catch (err) {
     res.status(400).send({
@@ -99,7 +96,6 @@ router.post('/logout', (_req, res) => {
 router.post('/refresh_token', async(req, res) => {
   const token = req.cookies.refreshtoken;
   if (!token) return res.send({accesstoken: ''});
-
   let payload = null;
 
   try {
@@ -109,11 +105,9 @@ router.post('/refresh_token', async(req, res) => {
     return res.send({accesstoken: ''});
   }
 
-
   //Token is valid, check if user exists
   const user = await User.findOne({_id: payload.userId});
   if(!user) return res.send({accesstoken: ''});
-
 
   if(user.refreshToken !== token) {
     return res.send({accesstoken: ''});

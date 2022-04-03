@@ -6,17 +6,17 @@ import {
   Input,
   Label,
   Button, Alert,
-} from "reactstrap";
-import {MapContainer, TileLayer, Marker, useMapEvents} from "react-leaflet";
-import "../styles/addEventForm.css";
-import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
-import { Multiselect } from "multiselect-react-dropdown";
+} from 'reactstrap';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import '../styles/addEventForm.css';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { Multiselect } from 'multiselect-react-dropdown';
 
 
-import useVisibilityChange from "../libs/VisibilityChange";
-import axios from "axios";
+import useVisibilityChange from '../libs/VisibilityChange';
+import axios from 'axios';
 
-import { UserContext } from "../App";
+import { UserContext } from '../App';
 
 
 function getTodayDateToInput() {
@@ -26,26 +26,26 @@ function getTodayDateToInput() {
   let yyyy = tempDate.getFullYear();
 
   if (dd < 10) {
-    dd = "0" + dd;
+    dd = '0' + dd;
   }
   if (mm < 10) {
-    mm = "0" + mm;
+    mm = '0' + mm;
   }
 
-  return yyyy + "-" + mm + "-" + dd;
+  return yyyy + '-' + mm + '-' + dd;
 }
 
-function LocalizeMe({ map }) {
+function LocalizeMe({map}) {
 
   const onClick = () => {
     map.locate();
-    map.on("locationfound", (e) => {
+    map.on('locationfound', (e) => {
       map.flyTo(e.latlng, map.getZoom());
     });
   }
 
   return (
-      <Button onClick={onClick}>Zlokalizuj mnie</Button>
+    <Button onClick={onClick}>Zlokalizuj mnie</Button>
   )
 }
 
@@ -86,28 +86,27 @@ const AddEventItem = ({eventCategories}) => {
     setSelectedCategories({});
     multiselectRef.current.resetSelectedValues();
     setLocation({latitude: 0, longitude: 0});
-    document.getElementById("paid").checked = false;
+    document.getElementById('paid').checked = false;
     setPaid(false);
     setPrice('');
-    if(priceComponent){
+    if (priceComponent) {
       setPriceVisibility();
     }
   }
 
 
   useEffect(() => {
-    if(auth) {
-      document.getElementById("day").setAttribute("min", getTodayDateToInput());
+    if (auth) {
+      document.getElementById('day').setAttribute('min', getTodayDateToInput());
 
-      if (!paid) document.getElementById("paid").checked = false;
+      if (!paid) document.getElementById('paid').checked = false;
     }
   }, [auth, paid, day])
 
 
-
   const handlePrice = (e) => {
-    if(paid){
-        setPrice(e.target.value);
+    if (paid) {
+      setPrice(e.target.value);
     } else {
       e.target.value = null;
     }
@@ -122,12 +121,13 @@ const AddEventItem = ({eventCategories}) => {
     </FormGroup>,
     false
   );
+
   function AddMarker() {
     const [position, setPosition] = useState({latitude: 0, longitude: 0})
 
     const map = useMapEvents({
       click(event) {
-        const { lat, lng } = event.latlng;
+        const {lat, lng} = event.latlng;
         setPosition({
           latitude: lat,
           longitude: lng,
@@ -142,9 +142,9 @@ const AddEventItem = ({eventCategories}) => {
 
 
     return (
-        position.latitude !== 0 ? (
-            <Marker position={[position.latitude, position.longitude]} />
-        ) : null
+      position.latitude !== 0 ? (
+        <Marker position={[position.latitude, position.longitude]}/>
+      ) : null
     )
   }
 
@@ -156,11 +156,10 @@ const AddEventItem = ({eventCategories}) => {
         zoom={11}
         scrollWheelZoom={true}
         whenCreated={setMap}
-        style={{ height: "400px" }}
+        style={{height: '400px'}}
       >
         <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
         />
         <AddMarker/>
       </MapContainer>
@@ -178,7 +177,7 @@ const AddEventItem = ({eventCategories}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(!paid){
+    if (!paid) {
       setPrice('');
     }
 
@@ -198,135 +197,135 @@ const AddEventItem = ({eventCategories}) => {
 
 
     axios.post('/api/events/', event)
-        .then((res) => {
-          setMessage({message: res.data, color: 'success'})
-          setVisible(true);
-          clearForm();
-        })
-        .catch(err => handleFormError(err));
+      .then((res) => {
+        setMessage({message: res.data, color: 'success'})
+        setVisible(true);
+        clearForm();
+      })
+      .catch(err => handleFormError(err));
 
   }
 
   return (
-      <div>
-      { user.accessToken ?
-            <Container className="add-event-form">
-              <h3 style={{padding: "10px 0 10px 0"}}>Dodaj nowe wydarzenie</h3>
-              <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
-                {message.message ? message.message : null}
-              </Alert>
-              <Container>
-                <Form onSubmit={handleSubmit}>
-                  <FormGroup className="border-bottom" row>
-                    <Label for="title" sm={2}>
-                      Tytuł
-                    </Label>
-                    <Col sm={8}>
-                      <Input
-                          type="text"
-                          className="form-control"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                          name="title"
-                          placeholder="Tytuł"
-                          id="title"
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row className="border-bottom">
-                    <Label for="description" sm={2}>
-                      Opis
-                    </Label>
-                    <Col sm={8}>
-                      <Input
-                          type="textarea"
-                          style={{minHeight: "80px", height: "150px"}}
-                          name="description"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                          id="description"
-                          placeholder="Opis wydarzenia"
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row className="border-bottom">
-                    <Label for="day" sm={2}>
-                      Kiedy?
-                    </Label>
-                    <Col sm={8}>
-                      <Input type="date" id="day" value={day} onChange={(e) => {
-                        setDay(e.target.value)
-                      }}/>
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row className="border-bottom">
-                    <Label for="time" sm={2}>
-                      Czas
-                    </Label>
-                    <Col sm={8}>
-                      <Input type="text" id="time" placeholder="HH:mm" pattern='([01]?[0-9]|2[0-3]):[0-5][0-9]'
-                             value={time} onChange={(e) => {
-                        setTime(e.target.value)
-                      }}/>
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row className="border-bottom">
-                    <Label for="street" sm={2}>
-                      Adres
-                    </Label>
-                    <Col sm={8}>
-                      <Input type="text" id="street" placeholder="Ulica, numer budynku..."
-                             value={street} onChange={(e) => {
-                        setStreet(e.target.value);
-                      }}/>
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row className="border-bottom">
-                    <Label for="location" sm={2}>
-                      Lokalizacja <br/>
-                      {map ? <LocalizeMe map={map}/> : null}
-                    </Label>
-                    <Col sm={8}>{displayMap}</Col>
-                  </FormGroup>
-                  <FormGroup row className="border-bottom">
-                    <Label for="categories" sm={2}>
-                      Kategorie
-                    </Label>
-                    <Col sm={8}>
-                      <Multiselect
-                          options={eventCategories} // Options to display in the dropdown
-                          displayValue="name" // Property name to display in the dropdown options
-                          onSelect={categoriesSelect}
-                          onRemove={categoriesSelect}
-                          selectionLimit="3"
-                          ref={multiselectRef}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup className="border-bottom-last" check inline style={{marginTop: "15px"}}>
-                    <Input
-                        type="checkbox"
-                        id="paid"
-                        onChange={() => {
-                          setPaid(!paid);
-                          setPrice('')
-                        }}
-                        onClick={() => {
-                          setPriceVisibility();
-                        }}
-                    />{" "}
-                    Wydarzenie płatne
-                  </FormGroup>
-                  {priceComponent}
-                  <br/>
-                  <Button style={{marginTop: "10px"}}>
-                    Dodaj
-                  </Button>
-                </Form>
-              </Container>
-            </Container> : <p>Access Denied</p>
+    <div>
+      {user.accessToken ?
+        <Container className="add-event-form">
+          <h3 style={{padding: '10px 0 10px 0'}}>Dodaj nowe wydarzenie</h3>
+          <Alert color={message.color} isOpen={visible} toggle={onDismiss}>
+            {message.message ? message.message : null}
+          </Alert>
+          <Container>
+            <Form onSubmit={handleSubmit}>
+              <FormGroup className="border-bottom" row>
+                <Label for="title" sm={2}>
+                  Tytuł
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    name="title"
+                    placeholder="Tytuł"
+                    id="title"
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row className="border-bottom">
+                <Label for="description" sm={2}>
+                  Opis
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="textarea"
+                    style={{minHeight: '80px', height: '150px'}}
+                    name="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    id="description"
+                    placeholder="Opis wydarzenia"
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row className="border-bottom">
+                <Label for="day" sm={2}>
+                  Kiedy?
+                </Label>
+                <Col sm={8}>
+                  <Input type="date" id="day" value={day} onChange={(e) => {
+                    setDay(e.target.value)
+                  }}/>
+                </Col>
+              </FormGroup>
+              <FormGroup row className="border-bottom">
+                <Label for="time" sm={2}>
+                  Czas
+                </Label>
+                <Col sm={8}>
+                  <Input type="text" id="time" placeholder="HH:mm" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                         value={time} onChange={(e) => {
+                    setTime(e.target.value)
+                  }}/>
+                </Col>
+              </FormGroup>
+              <FormGroup row className="border-bottom">
+                <Label for="street" sm={2}>
+                  Adres
+                </Label>
+                <Col sm={8}>
+                  <Input type="text" id="street" placeholder="Ulica, numer budynku..."
+                         value={street} onChange={(e) => {
+                    setStreet(e.target.value);
+                  }}/>
+                </Col>
+              </FormGroup>
+              <FormGroup row className="border-bottom">
+                <Label for="location" sm={2}>
+                  Lokalizacja <br/>
+                  {map ? <LocalizeMe map={map}/> : null}
+                </Label>
+                <Col sm={8}>{displayMap}</Col>
+              </FormGroup>
+              <FormGroup row className="border-bottom">
+                <Label for="categories" sm={2}>
+                  Kategorie
+                </Label>
+                <Col sm={8}>
+                  <Multiselect
+                    options={eventCategories} // Options to display in the dropdown
+                    displayValue="name" // Property name to display in the dropdown options
+                    onSelect={categoriesSelect}
+                    onRemove={categoriesSelect}
+                    selectionLimit="3"
+                    ref={multiselectRef}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup className="border-bottom-last" check inline style={{marginTop: '15px'}}>
+                <Input
+                  type="checkbox"
+                  id="paid"
+                  onChange={() => {
+                    setPaid(!paid);
+                    setPrice('')
+                  }}
+                  onClick={() => {
+                    setPriceVisibility();
+                  }}
+                />{' '}
+                Wydarzenie płatne
+              </FormGroup>
+              {priceComponent}
+              <br/>
+              <Button style={{marginTop: '10px'}}>
+                Dodaj
+              </Button>
+            </Form>
+          </Container>
+        </Container> : <p>Access Denied</p>
       }
-      </div>
+    </div>
   );
 }
 

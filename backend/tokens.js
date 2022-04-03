@@ -26,7 +26,6 @@ const sendRefreshToken = (res, token) => {
         httpOnly: true,
         path: '/api/users/refresh_token'
     })
-
 }
 
 module.exports = {

@@ -1,19 +1,19 @@
-import React, { useEffect, useState, createContext } from "react";
-import { Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import React, { useEffect, useState, createContext } from 'react';
+import { Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-import axios from "axios";
+import axios from 'axios';
 
-import BrowseEvents from "./components/BrowseEvents";
-import HomePage from "./components/HomePage";
-import AddEventItem from "./components/AddEventItem";
-import ContactPage from "./components/ContactPage";
-import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
-import Navigation from "./components/Navigation";
-import ShowEvent from "./components/ShowEvent";
-import EventsAccept from "./components/EventsAccept";
+import BrowseEvents from './components/BrowseEvents';
+import HomePage from './components/HomePage';
+import AddEventItem from './components/AddEventItem';
+import ContactPage from './components/ContactPage';
+import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
+import Navigation from './components/Navigation';
+import ShowEvent from './components/ShowEvent';
+import EventsAccept from './components/EventsAccept';
 
 axios.defaults.withCredentials = true;
 export const UserContext = createContext([]);
@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     async function checkRefreshToken() {
       await axios
-        .post(process.env.baseURL || "/api/users/refresh_token", "", {
+        .post(process.env.baseURL || '/api/users/refresh_token', '', {
           withCredentials: true,
         })
         .then((response) => {
@@ -42,16 +42,16 @@ function App() {
           });
         });
     }
-    async function getEventsFromApi() {
+
+    async function getEventsFromAPI() {
       await axios
-        .get(process.env.baseURL || "/api/events")
+        .get('/api/events')
         .then((response) => {
-            console.log(response);
           const resAccepted = response.data.filter(
-            (eventy) => eventy.accepted === true
+            (event) => event.accepted === true
           );
           const resNotAccepted = response.data.filter(
-            (eventy) => eventy.accepted === false
+            (event) => event.accepted === false
           );
           setAcceptedEvents(resAccepted);
           setNotAcceptedEvents(resNotAccepted);
@@ -61,21 +61,21 @@ function App() {
       setLoading(false);
     }
 
-    getEventsFromApi();
+    getEventsFromAPI();
     checkRefreshToken();
   }, []);
 
   const [eventCategories] = useState([
     {
-      name: "Koncert",
+      name: 'Koncert',
       id: 1,
     },
     {
-      name: "Teatr",
+      name: 'Teatr',
       id: 2,
     },
     {
-      name: "Na zewnątrz",
+      name: 'Na zewnątrz',
       id: 3,
     },
   ]);
@@ -84,30 +84,30 @@ function App() {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      <Navigation />
+      <Navigation/>
       <Route
         path="/event/add"
         render={(props) => (
-          <AddEventItem {...props} eventCategories={eventCategories} />
+          <AddEventItem {...props} eventCategories={eventCategories}/>
         )}
       />
-      <Route path="/contact" component={ContactPage} />
-      <Route path="/login" render={(props) => <LoginPage {...props} />} />
-      <Route path="/register" component={RegisterPage} />
+      <Route path="/contact" component={ContactPage}/>
+      <Route path="/login" render={(props) => <LoginPage {...props} />}/>
+      <Route path="/register" component={RegisterPage}/>
       <AcceptedEventContext.Provider
         value={[acceptedEvents, setAcceptedEvents]}
       >
-        <Route path={["/", "/home"]} exact component={HomePage} />
+        <Route path={['/', '/home']} exact component={HomePage}/>
         <Route
           exact
           path="/events"
           render={(props) => (
-            <BrowseEvents {...props} eventCategories={eventCategories} />
+            <BrowseEvents {...props} eventCategories={eventCategories}/>
           )}
         />
         <EventContext.Provider value={[events, setEvents]}>
           <Route path={`/events/:eventId`}>
-            <ShowEvent />
+            <ShowEvent/>
           </Route>
         </EventContext.Provider>
       </AcceptedEventContext.Provider>
@@ -115,7 +115,7 @@ function App() {
         value={[notAcceptedEvents, setNotAcceptedEvents]}
       >
         <Route path={`/toacceptevents`}>
-          <EventsAccept />
+          <EventsAccept/>
         </Route>
       </NotAcceptedEventContext.Provider>
     </UserContext.Provider>
